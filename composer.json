@@ -3,6 +3,8 @@
         "php": "^7.4.0",
         "knplabs/github-api": "^2.17",
         "php-http/guzzle6-adapter": "^2.0",
-        "symfony/yaml": "^5.2"
+        "symfony/yaml": "^5.2",
+        "twig/twig": "^3.0",
+        "morilog/jalali": "^3.2"
     }
 }
