@@ -1,0 +1,97 @@
+<html lang="fa" dir="rtl">
+
+<head>
+    <title>خبرنامه شماره یک</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        @font-face {
+            font-family: "Samim";
+            src: url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.eot");
+            src: url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.eot?#iefix") format("embedded-opentype"),
+                url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.woff") format("woff"),
+                url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.ttf") format("truetype");
+            font-weight: normal;
+        }
+
+        @font-face {
+            font-family: "Samim";
+            src: url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.eot");
+            src: url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.eot?#iefix") format("embedded-opentype"),
+                url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.woff") format("woff"),
+                url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.ttf") format("truetype");
+            font-weight: bold;
+        }
+
+        ul {
+            padding: 0 25px;
+            /* list-style-type: none; */
+        }
+    </style>
+</head>
+
+<body style="max-width: 680px; margin: 0 auto">
+    <br /><br />
+    <h1 style="
+        font-size: 25px;
+        text-align: center;
+        font-family: 'Samim';
+        direction: rtl;
+        font-weight: bold;
+        color: #263238;
+      ">
+        خبر‌نامه مهندسان نرم‌افزار
+    </h1>
+    <h3 style="
+        font-size: 18px;
+        text-align: center;
+        font-family: 'Samim';
+        direction: rtl;
+        color: #263238;
+      ">
+        شماره {{ newsletterNumber }} - {{ currentDate }}
+    </h3>
+    <hr />
+    <ul style="text-align: right; font-family: 'Samim'; direction: rtl">
+        {% for post in posts %}
+            <li style="font-size: 18px;">
+                <b>{{ post.postTitle }}</b>
+            </li>
+            <p>
+                {{ post.postDescription }}
+                <br />
+                <a style="font-size: 14px;" href="{{ post.postLink }}">مطالعه مطلب اصلی</a>
+            </p>
+            {% if loop.last != true %}
+                <br />
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <hr />
+    <p style="font-size: 13px; font-family: 'Samim'; direction: rtl; text-align: right;">
+        در این شماره از خبرنامه، دوستان خوبی به نام‌های
+        {% for post in posts %}
+            {% if loop.last %}
+                {{ post.userFullName }}
+            {% else %}
+                {{ post.userFullName }},
+            {% endif %}
+        {% endfor %}
+        در تهیه محتوا کمک کردند.
+    </p>
+    <hr />
+    <br />
+    <p style="
+        text-align: center;
+        font-size: 13px;
+        font-family: 'Samim';
+        direction: rtl;
+      ">
+        <a href="#">لغو اشتراک</a>
+        <br />
+        (در صورت تمایل خوشحال میشویم علت لغو اشتراک شما را بدانیم. به ما
+        <a href="mailto: newsletter@softwaretalks.ir">ایمیل</a> بزنید)
+    </p>
+    <br />
+</body>
+
+</html>
