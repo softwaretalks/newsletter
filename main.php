@@ -16,7 +16,7 @@ use Symfony\Component\Yaml\Exception\ParseException;
 $githubClient = new Client();
 $posts = [];
 $issues = $githubClient->api('issue')->all('softwaretalks', 'newsletter', [
-    'labels' => 'content,current-week',
+    'labels' => 'content,current-week,verified',
     'state' => 'open',
 ]);
 

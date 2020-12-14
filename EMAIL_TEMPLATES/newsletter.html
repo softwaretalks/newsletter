@@ -54,12 +54,12 @@
     <ul style="text-align: right; font-family: 'Samim'; direction: rtl">
         {% for post in posts %}
             <li style="font-size: 18px;">
-                <b>{{ post.title }}</b>
+                <b>{{ post.postTitle }}</b>
             </li>
             <p>
-                {{ post.description }}
+                {{ post.postDescription }}
                 <br />
-                <a style="font-size: 14px;" href="{{ post.link }}">مطالعه مطلب اصلی</a>
+                <a style="font-size: 14px;" href="{{ post.postLink }}">مطالعه مطلب اصلی</a>
             </p>
             {% if loop.last != true %}
                 <br />
@@ -71,9 +71,9 @@
         در این شماره از خبرنامه، دوستان خوبی به نام‌های
         {% for post in posts %}
             {% if loop.last %}
-                {{ post.name }}
+                {{ post.userFullName }}
             {% else %}
-                {{ post.name }},
+                {{ post.userFullName }},
             {% endif %}
         {% endfor %}
         در تهیه محتوا کمک کردند.
@@ -89,7 +89,7 @@
         <a href="#">لغو اشتراک</a>
         <br />
         (در صورت تمایل خوشحال میشویم علت لغو اشتراک شما را بدانیم. به ما
-        <a href="mailto: info@softwaretalks.ir">ایمیل</a> بزنید)
+        <a href="mailto: newsletter@softwaretalks.ir">ایمیل</a> بزنید)
     </p>
     <br />
 </body>
