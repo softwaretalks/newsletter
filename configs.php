@@ -1,5 +1,12 @@
 <?php
 
+if( trim(getenv('PAKAT_API_KEY')) === '' ||
+    trim(getenv('PAKAT_SMTP_PASSWORD')) === '' ||
+    trim(getenv('PAKAT_SMTP_USERNAME')) === '')
+{
+    die('Please set ENV' . PHP_EOL);
+}
+
 return [
     'REPOSITORY_ORGANIZATION'  => 'softwaretalks',
     'REPOSITORY_NAME'          => 'newsletter',
