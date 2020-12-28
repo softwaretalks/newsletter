@@ -5,6 +5,10 @@
         "php-http/guzzle6-adapter": "^2.0",
         "symfony/yaml": "^5.2",
         "twig/twig": "^3.0",
-        "morilog/jalali": "^3.2"
+        "morilog/jalali": "^3.2",
+        "phpmailer/phpmailer": "^6.2",
+        "sendinblue/api-v3-sdk": "7.x.x",
+        "wyrihaximus/html-compress": "^4.1",
+        "amirbagh75/chalqoz": "^1.0"
     }
 }
