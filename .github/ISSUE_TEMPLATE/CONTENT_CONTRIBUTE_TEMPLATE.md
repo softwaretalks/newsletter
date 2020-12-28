@@ -9,7 +9,7 @@ assignees: amirbagh75, Hameds
 ---
 
 ##### نام و نام‌خانوادگی شما
-fullName: ""
+userFullName: ""
 
 ##### لینک مطلب رو کامل وارد کنید.
 postLink: ""
