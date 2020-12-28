@@ -130,18 +130,24 @@ if($configs['CAN_SEND_EMAIL']) {
 /*
  *
  * 5- close related issues
+ * It is currently manual.
  *
  */
 
-// MANUAL
 
 /*
  *
  * 6- add archive to website
+ * It is currently manual.
  *
  */
 
-// MANUAL
+
+/*
+ *
+ * Done.
+ *
+ */
 
 $scriptEndedAt = microtime(true);
 printf('Good job, it took %s seconds.' . PHP_EOL, $after-$before);
