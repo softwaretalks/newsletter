@@ -5,16 +5,15 @@ $scriptStartedAt = microtime(true);
 require_once __DIR__ . '/vendor/autoload.php';
 $configs = require_once __DIR__ . '/configs.php';
 
-use Amirbagh75\Chalqoz\Chalqoz;
-use Github\Client;
-use PHPMailer\PHPMailer\PHPMailer;
 use SendinBlue\Client\Api\ContactsApi;
-use SendinBlue\Client\Configuration;
-use Symfony\Component\Yaml\Yaml;
-use Twig\Environment;
-use Twig\Loader\FilesystemLoader;
 use WyriHaximus\HtmlCompress\Factory;
-
+use SendinBlue\Client\Configuration;
+use PHPMailer\PHPMailer\PHPMailer;
+use Twig\Loader\FilesystemLoader;
+use Symfony\Component\Yaml\Yaml;
+use Amirbagh75\Chalqoz\Chalqoz;
+use Twig\Environment;
+use Github\Client;
 
 /*
  *
