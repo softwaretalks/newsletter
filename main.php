@@ -56,8 +56,8 @@ $twig = new Environment($loader, [
 
 try {
     $template = $twig->render($configs['EMAIL_TEMPLATE_FILE_NAME'], [
-        'currentDate'      => Chalqoz::convertEnglishNumbersToPersian(jdate()->format('%A, %d %B %y')),
-        'newsletterNumber' => '1',
+        'currentDate'      => Chalqoz::convertEnglishNumbersToPersian(jdate()->format('%A، %d %B %y')),
+        'newsletterNumber' => Chalqoz::convertEnglishNumbersToPersian('1'),
         'posts'            => $posts,
     ]);
     $htmlCompress = Factory::constructSmallest();
@@ -107,21 +107,20 @@ if($configs['CAN_SEND_EMAIL']) {
         $mail->isSMTP();
         $mail->SMTPDebug  = $configs['PAKAT_SMTP_DEBUG'];
         $mail->SMTPAuth   = true;
-        $mail->Timeout    = 10;
+        $mail->Timeout    = 60;
         $mail->Host       = $configs['PAKAT_SMTP_HOST'];
         $mail->Port       = $configs['PAKAT_SMTP_PORT'];
         $mail->Username   = $configs['PAKAT_SMTP_USERNAME'];
         $mail->Password   = $configs['PAKAT_SMTP_PASSWORD'];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->CharSet    = 'UTF-8';
-        $mail->Subject    = 'خبرنامه شماره یک';
+        $mail->Subject    = 'خبرنامه Software Talks، شماره یک';
         $mail->Body       = $htmlTemplate;
         foreach ($userEmails as $key => $value) {
             $mail->addAddress($value);
         }
         $mail->setFrom($configs['PAKAT_SMTP_EMAIL_ADDRESS'], $configs['PAKAT_SMTP_EMAIL_NAME']);
         $mail->send();
-        printf('Message has been sent' . PHP_EOL);
     } catch (Exception $exception) {
         die("Message could not be sent. Mailer Error: {$exception->getMessage()}" . PHP_EOL);
     }
