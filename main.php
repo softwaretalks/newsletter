@@ -34,7 +34,7 @@ try {
         $posts[] = Yaml::parse($issue['body']);
     }
     if (count($posts) === 0) {
-        die("There is no post!\n");
+        die('There is no post!' . PHP_EOL);
     }
 } catch (Exception $exception) {
     die("Unable to parse the YAML string: {$exception->getMessage()}" . PHP_EOL);
