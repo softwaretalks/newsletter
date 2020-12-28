@@ -13,7 +13,7 @@ return [
     'EMAIL_TEMPLATE_FILE_NAME' => 'newsletter.html',
     'PAKAT_API_KEY'            => getenv('PAKAT_API_KEY'),
     'PAKAT_SMTP_HOST'          => 'smtp-relay.sendinblue.com',
-    'PAKAT_SMTP_PORT'          => '578',
+    'PAKAT_SMTP_PORT'          => '587',
     'PAKAT_SMTP_USERNAME'      => getenv('PAKAT_SMTP_USERNAME'),
     'PAKAT_SMTP_PASSWORD'      => getenv('PAKAT_SMTP_PASSWORD'),
     'PAKAT_SMTP_EMAIL_NAME'    => 'Softwaretalks newsletter',
