@@ -21,7 +21,7 @@ use WyriHaximus\HtmlCompress\Factory;
  * 1- Fetch issues from GitHub
  *
  */
-printf('1- Fetch issues from GitHub' . PHP_EOL);
+printf('--> Fetch issues from GitHub' . PHP_EOL);
 $posts = [];
 
 $githubClient = new Client();
@@ -46,7 +46,7 @@ try {
  * 2- Generate HTML template based on issues
  *
  */
-printf('2- Generate HTML template based on issues' . PHP_EOL);
+printf('--> Generate HTML template based on issues' . PHP_EOL);
 $htmlTemplate = "";
 
 $loader = new FilesystemLoader($configs['EMAIL_TEMPLATE_DIR']);
@@ -71,7 +71,7 @@ try {
  * 3- Fetch a list of registered users
  *
  */
-printf('3- Fetch a list of registered users' . PHP_EOL);
+printf('--> Fetch a list of registered users' . PHP_EOL);
 $userEmails = [];
 
 $pakatConfig = Configuration::getDefaultConfiguration()->setApiKey('api-key', $configs['PAKAT_API_KEY']);
@@ -99,7 +99,7 @@ try {
  * 4- Send email to all users with SMTP server
  *
  */
-printf('4- Send email to all users with SMTP server' . PHP_EOL);
+printf('--> Send email to all users with SMTP server' . PHP_EOL);
 
 if($configs['CAN_SEND_EMAIL']) {
     $mail = new PHPMailer(true);
@@ -150,4 +150,4 @@ if($configs['CAN_SEND_EMAIL']) {
  */
 
 $scriptEndedAt = microtime(true);
-printf('Good job, it took %s seconds.' . PHP_EOL, $after-$before);
+printf('--> Done. Good job, it took %s seconds.' . PHP_EOL, $after-$before);
