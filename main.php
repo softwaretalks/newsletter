@@ -150,4 +150,4 @@ if($configs['CAN_SEND_EMAIL']) {
  */
 
 $scriptEndedAt = microtime(true);
-printf('--> Done. Good job, it took %s seconds.' . PHP_EOL, $after-$before);
+printf('--> Done. Good job, it took %s seconds.' . PHP_EOL, $scriptEndedAt-$scriptStartedAt);
