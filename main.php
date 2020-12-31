@@ -54,13 +54,13 @@ $twig = new Environment($loader, [
 ]);
 
 try {
-    $template = $twig->render($configs['EMAIL_TEMPLATE_FILE_NAME'], [
+    $htmlTemplate = $twig->render($configs['EMAIL_TEMPLATE_FILE_NAME'], [
         'currentDate'      => Chalqoz::convertEnglishNumbersToPersian(jdate()->format('%A، %d %B %y')),
         'newsletterNumber' => Chalqoz::convertEnglishNumbersToPersian('1'),
         'posts'            => $posts,
     ]);
-    $htmlCompress = Factory::constructSmallest();
-    $htmlTemplate = $htmlCompress->compress($template);
+    $minifier = Factory::constructSmallest();
+    $minifiedHtmlTemplate = $minifier->compress($htmlTemplate);
 } catch (Exception $exception) {
     die("Unable to render template: {$exception->getMessage()}" . PHP_EOL);
 }
@@ -114,9 +114,9 @@ if($configs['CAN_SEND_EMAIL']) {
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->CharSet    = 'UTF-8';
         $mail->Subject    = 'خبرنامه Software Talks، شماره یک';
-        $mail->Body       = $htmlTemplate;
+        $mail->Body       = $minifiedHtmlTemplate;
         foreach ($userEmails as $key => $value) {
-            $mail->addAddress($value);
+            $mail->addBCC($value);
         }
         $mail->setFrom($configs['PAKAT_SMTP_EMAIL_ADDRESS'], $configs['PAKAT_SMTP_EMAIL_NAME']);
         $mail->send();
@@ -127,7 +127,7 @@ if($configs['CAN_SEND_EMAIL']) {
 
 /*
  *
- * 5- close related issues
+ * 5- Close related issues
  * It is currently manual.
  *
  */
@@ -135,7 +135,7 @@ if($configs['CAN_SEND_EMAIL']) {
 
 /*
  *
- * 6- add archive to website
+ * 6- Add archive to website
  * It is currently manual.
  *
  */
