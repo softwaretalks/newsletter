@@ -96,7 +96,7 @@ try {
     elseif($configs['SEND_ENV'] === 'production') {
         $newsletterListID = $configs['NEWSLETTER_LIST_ID'];
     }
-    $contacts = $contactsInstance->getContactsFromList($newsletterListID)->getContacts();
+    $contacts = $contactsInstance->getContactsFromList($newsletterListID, null, 500)->getContacts();
     if (count($contacts) === 0) {
         die("There is no user!" . PHP_EOL);
     }
