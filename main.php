@@ -80,7 +80,14 @@ $contactsInstance = new ContactsApi(
 );
 
 try {
-    $contacts = $contactsInstance->getContactsFromList($configs['NEWSLETTER_LIST_ID'])->getContacts();
+    $newsletterListID = "";
+    if($configs['SEND_ENV'] === 'test') {
+        $newsletterListID = $configs['NEWSLETTER_TEST_LIST_ID'];
+    }
+    elseif($configs['SEND_ENV'] === 'production') {
+        $newsletterListID = $configs['NEWSLETTER_LIST_ID'];
+    }
+    $contacts = $contactsInstance->getContactsFromList($newsletterListID)->getContacts();
     if (count($contacts) === 0) {
         die("There is no user!" . PHP_EOL);
     }
@@ -100,29 +107,27 @@ try {
  */
 printf('--> Send email to all users with SMTP server' . PHP_EOL);
 
-if($configs['CAN_SEND_EMAIL']) {
-    $mail = new PHPMailer(true);
-    try {
-        $mail->isSMTP();
-        $mail->SMTPDebug  = $configs['PAKAT_SMTP_DEBUG'];
-        $mail->SMTPAuth   = true;
-        $mail->Timeout    = 60;
-        $mail->Host       = $configs['PAKAT_SMTP_HOST'];
-        $mail->Port       = $configs['PAKAT_SMTP_PORT'];
-        $mail->Username   = $configs['PAKAT_SMTP_USERNAME'];
-        $mail->Password   = $configs['PAKAT_SMTP_PASSWORD'];
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->CharSet    = 'UTF-8';
-        $mail->Subject    = 'خبرنامه Software Talks، شماره یک';
-        $mail->Body       = $minifiedHtmlTemplate;
-        foreach ($userEmails as $key => $value) {
-            $mail->addBCC($value);
-        }
-        $mail->setFrom($configs['PAKAT_SMTP_EMAIL_ADDRESS'], $configs['PAKAT_SMTP_EMAIL_NAME']);
-        $mail->send();
-    } catch (Exception $exception) {
-        die("Message could not be sent. Mailer Error: {$exception->getMessage()}" . PHP_EOL);
+$mail = new PHPMailer(true);
+try {
+    $mail->isSMTP();
+    $mail->SMTPDebug  = $configs['PAKAT_SMTP_DEBUG'];
+    $mail->SMTPAuth   = true;
+    $mail->Timeout    = 60;
+    $mail->Host       = $configs['PAKAT_SMTP_HOST'];
+    $mail->Port       = $configs['PAKAT_SMTP_PORT'];
+    $mail->Username   = $configs['PAKAT_SMTP_USERNAME'];
+    $mail->Password   = $configs['PAKAT_SMTP_PASSWORD'];
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->CharSet    = 'UTF-8';
+    $mail->Subject    = 'خبرنامه Software Talks، شماره یک';
+    $mail->Body       = $minifiedHtmlTemplate;
+    foreach ($userEmails as $key => $value) {
+        $mail->addBCC($value);
     }
+    $mail->setFrom($configs['PAKAT_SMTP_EMAIL_ADDRESS'], $configs['PAKAT_SMTP_EMAIL_NAME']);
+    $mail->send();
+} catch (Exception $exception) {
+    die("Message could not be sent. Mailer Error: {$exception->getMessage()}" . PHP_EOL);
 }
 
 /*
