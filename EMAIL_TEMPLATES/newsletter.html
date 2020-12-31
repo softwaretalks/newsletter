@@ -50,7 +50,7 @@
         color: #263238;
       ">
     سلام. به خبرنامه هفتگی SoftwareTalks خوش آمدید. این خبرنامه روی <a
-        href="https://github.com/softwaretalks/newsletter">گیت‌هاب</a> در دسترس است و محتوای آن نیز توسط مشارک‌کنندگان
+        href="https://github.com/softwaretalks/newsletter">گیت‌هاب</a> در دسترس است و محتوای آن نیز توسط مشارکت‌کنندگان
     در پروژه اپن‌سورس خبرنامه تامین می‌شود. این اولین تلاش‌های ما برای ساخت یک خبرنامه هفتگی در حوزه توسعه نرم‌افزار است
     و خوشحال می‌شویم نظرات و پیشنهادات شما را در <a href="https://github.com/softwaretalks/newsletter">گیت‌هاب</a> پروژه
     بخوانیم. هر هفته پنج‌شنبه‌ها شماره جدید خبرنامه ارسال می‌شود. با معرفی خبرنامه به دوستان و همکاران خود و مشارکت در
@@ -75,11 +75,11 @@
 <hr/>
 <p style="font-size: 13px; font-family: 'Samim'; direction: rtl; text-align: right;">
     در این شماره از خبرنامه، دوستان خوبی به نام‌های
-    {% for post in posts %}
+    {% for contributor in contributors %}
         {% if loop.last %}
-            {{ post.userFullName }}
+            <b>{{ contributor }}</b>
         {% else %}
-            {{ post.userFullName }},
+            <b>{{ contributor }}،</b>
         {% endif %}
     {% endfor %}
     در تهیه محتوا کمک کردند.

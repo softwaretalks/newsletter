@@ -15,6 +15,8 @@ use Amirbagh75\Chalqoz\Chalqoz;
 use Twig\Environment;
 use Github\Client;
 
+printf('SEND_ENV: %s', $configs['SEND_ENV'] . PHP_EOL . PHP_EOL);
+
 /*
  *
  * 1- Fetch issues from GitHub
@@ -22,6 +24,7 @@ use Github\Client;
  */
 printf('--> Fetch issues from GitHub' . PHP_EOL);
 $posts = [];
+$contributors = [];
 
 $githubClient = new Client();
 $issues = $githubClient->api('issue')->all($configs['REPOSITORY_ORGANIZATION'], $configs['REPOSITORY_NAME'], [
@@ -30,12 +33,17 @@ $issues = $githubClient->api('issue')->all($configs['REPOSITORY_ORGANIZATION'], 
 ]);
 
 try {
+    $contributorsTemp = [];
     foreach ($issues as $issue) {
-        $posts[] = Yaml::parse($issue['body']);
+        $body = Yaml::parse($issue['body']);
+        $contributorsTemp[] = $body['userFullName'];
+        unset($body['userFullName']);
+        $posts[] = $body;
     }
     if (count($posts) === 0) {
         die('There is no post!' . PHP_EOL);
     }
+    $contributors = array_values(array_unique($contributorsTemp));
 } catch (Exception $exception) {
     die("Unable to parse the YAML string: {$exception->getMessage()}" . PHP_EOL);
 }
@@ -56,8 +64,9 @@ $twig = new Environment($loader, [
 try {
     $htmlTemplate = $twig->render($configs['EMAIL_TEMPLATE_FILE_NAME'], [
         'currentDate'      => Chalqoz::convertEnglishNumbersToPersian(jdate()->format('%A، %d %B %y')),
-        'newsletterNumber' => Chalqoz::convertEnglishNumbersToPersian('0'),
+        'newsletterNumber' => 'صفرم',
         'posts'            => $posts,
+        'contributors'     => $contributors,
     ]);
     $minifier = Factory::constructSmallest();
     $minifiedHtmlTemplate = $minifier->compress($htmlTemplate);
@@ -105,7 +114,7 @@ try {
  * 4- Send email to all users with SMTP server
  *
  */
-printf('--> Send email to all users with SMTP server' . PHP_EOL);
+printf('--> Send email to %s user with SMTP server' . PHP_EOL , (string)count($userEmails));
 
 $mail = new PHPMailer(true);
 try {
