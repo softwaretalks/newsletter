@@ -1,15 +1,14 @@
-<html lang="fa" dir="rtl">
+<html dir="rtl" lang="fa">
 
 <head>
-    <title>خبرنامه شماره یک</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
     <style>
         @font-face {
             font-family: "Samim";
             src: url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.eot");
             src: url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.eot?#iefix") format("embedded-opentype"),
-                url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.woff") format("woff"),
-                url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.ttf") format("truetype");
+            url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.woff") format("woff"),
+            url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.ttf") format("truetype");
             font-weight: normal;
         }
 
@@ -17,8 +16,8 @@
             font-family: "Samim";
             src: url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.eot");
             src: url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.eot?#iefix") format("embedded-opentype"),
-                url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.woff") format("woff"),
-                url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.ttf") format("truetype");
+            url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.woff") format("woff"),
+            url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.ttf") format("truetype");
             font-weight: bold;
         }
 
@@ -30,61 +29,89 @@
 </head>
 
 <body style="max-width: 680px; margin: 0 auto">
-    <br /><br />
-    <h1 style="font-size: 25px;text-align: center;font-family: 'Samim';direction: rtl;font-weight: bold;color: #263238;">
-        خبر‌نامه مهندسان نرم‌افزار
-    </h1>
-    <h3 style="
+<br/><br/>
+<h1 style="font-size: 25px;text-align: center;font-family: 'Samim';direction: rtl;font-weight: bold;color: #263238;">
+    خبر‌نامه مهندسان نرم‌افزار
+</h1>
+<h3 style="
         font-size: 18px;
         text-align: center;
         font-family: 'Samim';
         direction: rtl;
         color: #263238;
       ">
-        شماره {{ newsletterNumber }} - {{ currentDate }}
-    </h3>
-    <hr />
-    <ul style="text-align: right; font-family: 'Samim'; direction: rtl">
-        {% for post in posts %}
-            <li style="font-size: 18px;">
-                <b>{{ post.postTitle }}</b>
-            </li>
-            <p>
-                {{ post.postDescription }}
-                <br />
-                <a style="font-size: 14px;" href="{{ post.postLink }}">مطالعه مطلب اصلی</a>
-            </p>
-            {% if loop.last != true %}
-                <br />
-            {% endif %}
-        {% endfor %}
-    </ul>
-    <hr />
-    <p style="font-size: 13px; font-family: 'Samim'; direction: rtl; text-align: right;">
-        در این شماره از خبرنامه، دوستان خوبی به نام‌های
-        {% for post in posts %}
-            {% if loop.last %}
-                {{ post.userFullName }}
-            {% else %}
-                {{ post.userFullName }},
-            {% endif %}
-        {% endfor %}
-        در تهیه محتوا کمک کردند.
-    </p>
-    <hr />
-    <br />
-    <p style="
+    شماره {{ newsletterNumber }} - {{ currentDate }}
+</h3>
+<p style="
+        font-size: 14px;
+        text-align: right;
+        font-family: 'Samim';
+        direction: rtl;
+        color: #263238;
+      ">
+    سلام. به خبرنامه هفتگی SoftwareTalks خوش آمدید. این خبرنامه روی <a
+        href="https://github.com/softwaretalks/newsletter">گیت‌هاب</a> در دسترس است و محتوای آن نیز توسط مشارک‌کنندگان
+    در پروژه اپن‌سورس خبرنامه تامین می‌شود. این اولین تلاش‌های ما برای ساخت یک خبرنامه هفتگی در حوزه توسعه نرم‌افزار است
+    و خوشحال می‌شویم نظرات و پیشنهادات شما را در <a href="https://github.com/softwaretalks/newsletter">گیت‌هاب</a> پروژه
+    بخوانیم. هر هفته پنج‌شنبه‌ها شماره جدید خبرنامه ارسال می‌شود. با معرفی خبرنامه به دوستان و همکاران خود و مشارکت در
+    تامین محتوا، به بهبود پروژه و اشتراک‌گذاری بهتر منابع کمک کنید.
+</p>
+<hr/>
+<ul style="text-align: right; font-family: 'Samim'; direction: rtl">
+    {% for post in posts %}
+        <li style="font-size: 18px;">
+            <b>{{ post.postTitle }}</b>
+        </li>
+        <p>
+            {{ post.postDescription }}
+            <br/>
+            <a href="{{ post.postLink }}" style="font-size: 14px;">مطالعه مطلب اصلی</a>
+        </p>
+        {% if loop.last != true %}
+        <br/>
+        {% endif %}
+    {% endfor %}
+</ul>
+<hr/>
+<p style="font-size: 13px; font-family: 'Samim'; direction: rtl; text-align: right;">
+    در این شماره از خبرنامه، دوستان خوبی به نام‌های
+    {% for post in posts %}
+        {% if loop.last %}
+            {{ post.userFullName }}
+        {% else %}
+            {{ post.userFullName }},
+        {% endif %}
+    {% endfor %}
+    در تهیه محتوا کمک کردند.
+</p>
+<hr/>
+<p style="
+        font-size: 16px;
+        text-align: center;
+        font-family: 'Samim';
+        direction: rtl;
+        color: #263238;
+      ">
+    ارسال شده توسط <a href="https://pakat.net/">پاکت</a>
+</p>
+<p style="
+        font-size: 14px;
+        text-align: center;
+        font-family: 'Samim';
+        direction: rtl;
+        color: #263238;
+      ">
+    <a href="https://pakat.net/">سرویس پاکت</a> اسپانسر ارسال ایمیل‌های این خبرنامه است. با کد تخفیف sota10 می‌توانید از
+    ۱۰ درصد تخفیف در خرید پلن‌های پاکت بهره‌مند شوید
+</p>
+<hr/>
+<p style="
         text-align: center;
         font-size: 13px;
         font-family: 'Samim';
         direction: rtl;
       ">
-        <a href="https://my.pakat.net/users/unsubscribe/js_id/6oud/id/2">لغو اشتراک</a>
-        <br />
-        (در صورت تمایل خوشحال میشویم علت لغو اشتراک شما را بدانیم. به ما
-        <a href="mailto: newsletter@softwaretalks.ir">ایمیل</a> بزنید)
-    </p>
-    <br />
-</body>
-
+    <a href="https://my.pakat.net/users/unsubscribe/js_id/6oud/id/2">لغو اشتراک</a>
+</p>
+<br/></body>
 </html>

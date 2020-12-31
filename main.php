@@ -56,7 +56,7 @@ $twig = new Environment($loader, [
 try {
     $htmlTemplate = $twig->render($configs['EMAIL_TEMPLATE_FILE_NAME'], [
         'currentDate'      => Chalqoz::convertEnglishNumbersToPersian(jdate()->format('%A، %d %B %y')),
-        'newsletterNumber' => Chalqoz::convertEnglishNumbersToPersian('1'),
+        'newsletterNumber' => Chalqoz::convertEnglishNumbersToPersian('0'),
         'posts'            => $posts,
     ]);
     $minifier = Factory::constructSmallest();
@@ -119,7 +119,7 @@ try {
     $mail->Password   = $configs['PAKAT_SMTP_PASSWORD'];
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->CharSet    = 'UTF-8';
-    $mail->Subject    = 'خبرنامه Software Talks، شماره یک';
+    $mail->Subject    = 'خبرنامه Software Talks، شماره صفرم';
     $mail->Body       = $minifiedHtmlTemplate;
     foreach ($userEmails as $key => $value) {
         $mail->addBCC($value);
