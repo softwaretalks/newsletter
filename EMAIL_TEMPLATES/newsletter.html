@@ -30,13 +30,13 @@
 
 <body style="max-width: 680px; margin: 0 auto">
 <br/><br/>
-<h1 style="font-size: 25px;text-align: center;font-family: 'Samim';direction: rtl;font-weight: bold;color: #263238;">
+<h1 style="font-size: 25px;text-align: center;font-family: 'Samim',sans-serif;direction: rtl;font-weight: bold;color: #263238;">
     خبر‌نامه مهندسان نرم‌افزار
 </h1>
 <h3 style="
         font-size: 18px;
         text-align: center;
-        font-family: 'Samim';
+        font-family: 'Samim',sans-serif;
         direction: rtl;
         color: #263238;
       ">
@@ -48,7 +48,7 @@
     </span>
 {% endif %}
 <hr/>
-<ul style="text-align: right; font-family: 'Samim'; direction: rtl">
+<ul style="text-align: right; font-family: 'Samim',sans-serif; direction: rtl">
     {% for post in posts %}
         <li style="font-size: 18px;">
             <b>{{ post.postTitle }}</b>
@@ -64,7 +64,7 @@
     {% endfor %}
 </ul>
 <hr/>
-<p style="font-size: 13px; font-family: 'Samim'; direction: rtl; text-align: right;">
+<p style="font-size: 13px; font-family: 'Samim',sans-serif; direction: rtl; text-align: right;">
     در این شماره از خبرنامه، دوستان خوبی به نام‌های
     {% for contributor in contributors %}
         {% if loop.last %}
@@ -85,7 +85,7 @@
 <p style="
         text-align: center;
         font-size: 13px;
-        font-family: 'Samim';
+        font-family: 'Samim',sans-serif;
         direction: rtl;
       ">
     <a href="https://my.pakat.net/users/unsubscribe/js_id/6oud/id/2">لغو اشتراک</a>
