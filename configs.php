@@ -32,5 +32,7 @@ return [
     'PAKAT_SMTP_DEBUG'         => false,
     'NEWSLETTER_TEST_LIST_ID'  => '8',
     'NEWSLETTER_LIST_ID'       => '2',
-    'SEND_ENV'                 => getenv('SEND_ENV', true)
+    'SEND_ENV'                 => getenv('SEND_ENV', true),
+    'TOP_CONTENT_HTML'         => getenv('TOP_CONTENT_HTML', true),
+    'BOTTOM_CONTENT_HTML'      => getenv('BOTTOM_CONTENT_HTML', true)
 ];

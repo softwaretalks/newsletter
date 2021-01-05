@@ -67,6 +67,8 @@ try {
         'newsletterNumber' => 'صفرم',
         'posts'            => $posts,
         'contributors'     => $contributors,
+        'topContent'       => $configs['TOP_CONTENT_HTML'],
+        'bottomContent'    => $configs['BOTTOM_CONTENT_HTML']
     ]);
     $minifier = Factory::constructSmallest();
     $minifiedHtmlTemplate = $minifier->compress($htmlTemplate);
