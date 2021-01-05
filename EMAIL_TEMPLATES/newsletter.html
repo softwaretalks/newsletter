@@ -42,20 +42,11 @@
       ">
     شماره {{ newsletterNumber }} - {{ currentDate }}
 </h3>
-<p style="
-        font-size: 14px;
-        text-align: right;
-        font-family: 'Samim';
-        direction: rtl;
-        color: #263238;
-      ">
-    سلام. به خبرنامه هفتگی SoftwareTalks خوش آمدید. این خبرنامه روی <a
-        href="https://github.com/softwaretalks/newsletter">گیت‌هاب</a> در دسترس است و محتوای آن نیز توسط مشارکت‌کنندگان
-    در پروژه اپن‌سورس خبرنامه تامین می‌شود. این اولین تلاش‌های ما برای ساخت یک خبرنامه هفتگی در حوزه توسعه نرم‌افزار است
-    و خوشحال می‌شویم نظرات و پیشنهادات شما را در <a href="https://github.com/softwaretalks/newsletter">گیت‌هاب</a> پروژه
-    بخوانیم. هر هفته پنج‌شنبه‌ها شماره جدید خبرنامه ارسال می‌شود. با معرفی خبرنامه به دوستان و همکاران خود و مشارکت در
-    تامین محتوا، به بهبود پروژه و اشتراک‌گذاری بهتر منابع کمک کنید.
-</p>
+{% if topContent is not empty %}
+    <span>
+        {{ topContent|raw }}
+    </span>
+{% endif %}
 <hr/>
 <ul style="text-align: right; font-family: 'Samim'; direction: rtl">
     {% for post in posts %}
@@ -84,27 +75,13 @@
     {% endfor %}
     در تهیه محتوا کمک کردند.
 </p>
-<hr/>
-<p style="
-        font-size: 16px;
-        text-align: center;
-        font-family: 'Samim';
-        direction: rtl;
-        color: #263238;
-      ">
-    ارسال شده توسط <a href="https://pakat.net/">پاکت</a>
-</p>
-<p style="
-        font-size: 14px;
-        text-align: center;
-        font-family: 'Samim';
-        direction: rtl;
-        color: #263238;
-      ">
-    <a href="https://pakat.net/">سرویس پاکت</a> اسپانسر ارسال ایمیل‌های این خبرنامه است. با کد تخفیف sota10 می‌توانید از
-    ۱۰ درصد تخفیف در خرید پلن‌های پاکت بهره‌مند شوید
-</p>
-<hr/>
+{% if bottomContent is not empty %}
+    <hr/>
+    <span>
+        {{ bottomContent|raw }}
+    </span>
+    <hr/>
+{% endif %}
 <p style="
         text-align: center;
         font-size: 13px;
