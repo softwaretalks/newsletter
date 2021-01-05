@@ -1,9 +1,8 @@
 name: "Sample"
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: '*/5 * * * *'
   workflow_dispatch:
-  push:
 
 jobs:
   sample:
