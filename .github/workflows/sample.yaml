@@ -2,9 +2,10 @@ name: "Sample"
 on:
   schedule:
     - cron: "*/5 * * * *"
+  workflow_dispatch:
 
 jobs:
-  stale:
+  sample:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
