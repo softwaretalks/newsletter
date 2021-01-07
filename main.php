@@ -64,7 +64,7 @@ $twig = new Environment($loader, [
 try {
     $htmlTemplate = $twig->render($configs['EMAIL_TEMPLATE_FILE_NAME'], [
         'currentDate'      => Chalqoz::convertEnglishNumbersToPersian(jdate()->format('%A، %d %B %y')),
-        'newsletterNumber' => 'صفرم',
+        'newsletterNumber' => 'یکم',
         'posts'            => $posts,
         'contributors'     => $contributors,
         'topContent'       => $configs['TOP_CONTENT_HTML'],
@@ -83,6 +83,7 @@ try {
  */
 printf('--> Fetch a list of registered users' . PHP_EOL);
 $userEmails = [];
+$userEmailsTemp = [];
 
 $pakatConfig = Configuration::getDefaultConfiguration()->setApiKey('api-key', $configs['PAKAT_API_KEY']);
 $contactsInstance = new ContactsApi(
@@ -104,9 +105,12 @@ try {
     }
     foreach ($contacts as $contact) {
         if ($contact['emailBlacklisted'] === false) {
-            array_push($userEmails, $contact['email']);
+            array_push($userEmailsTemp, $contact['email']);
         }
     }
+    // Due to the limited number of emails per post (99 email per send), 
+    // the list of users should be broken down into smaller numbers.
+    $userEmails = array_chunk($userEmailsTemp, 50, true);
 } catch (Exception $exception) {
     die("Exception when calling AccountApi->getContactsFromList: {$exception->getMessage()}" . PHP_EOL);
 }
@@ -116,27 +120,29 @@ try {
  * 4- Send email to all users with SMTP server
  *
  */
-printf('--> Send email to %s user with SMTP server' . PHP_EOL , (string)count($userEmails));
+printf('--> Send email to %s user with SMTP server' . PHP_EOL , (string)array_sum(array_map("count", $userEmails)));
 
 $mail = new PHPMailer(true);
 try {
-    $mail->isSMTP();
-    $mail->SMTPDebug  = $configs['PAKAT_SMTP_DEBUG'];
-    $mail->SMTPAuth   = true;
-    $mail->Timeout    = 60;
-    $mail->Host       = $configs['PAKAT_SMTP_HOST'];
-    $mail->Port       = $configs['PAKAT_SMTP_PORT'];
-    $mail->Username   = $configs['PAKAT_SMTP_USERNAME'];
-    $mail->Password   = $configs['PAKAT_SMTP_PASSWORD'];
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->CharSet    = 'UTF-8';
-    $mail->Subject    = 'خبرنامه Software Talks، شماره صفرم';
-    $mail->Body       = $minifiedHtmlTemplate;
-    foreach ($userEmails as $key => $value) {
-        $mail->addBCC($value);
+    foreach ($userEmails as $userEmailsArray) {
+        $mail->isSMTP();
+        $mail->SMTPDebug  = $configs['PAKAT_SMTP_DEBUG'];
+        $mail->SMTPAuth   = true;
+        $mail->Timeout    = 60;
+        $mail->Host       = $configs['PAKAT_SMTP_HOST'];
+        $mail->Port       = $configs['PAKAT_SMTP_PORT'];
+        $mail->Username   = $configs['PAKAT_SMTP_USERNAME'];
+        $mail->Password   = $configs['PAKAT_SMTP_PASSWORD'];
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->CharSet    = 'UTF-8';
+        $mail->Subject    = 'خبرنامه Software Talks، شماره یکم';
+        $mail->Body       = $minifiedHtmlTemplate;
+        foreach ($userEmailsArray as $email) {
+            $mail->addBCC($email);
+        }
+        $mail->setFrom($configs['PAKAT_SMTP_EMAIL_ADDRESS'], $configs['PAKAT_SMTP_EMAIL_NAME']);
+        $mail->send();
     }
-    $mail->setFrom($configs['PAKAT_SMTP_EMAIL_ADDRESS'], $configs['PAKAT_SMTP_EMAIL_NAME']);
-    $mail->send();
 } catch (Exception $exception) {
     die("Message could not be sent. Mailer Error: {$exception->getMessage()}" . PHP_EOL);
 }
