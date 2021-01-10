@@ -279,7 +279,6 @@ h6 {
   font-weight: 600;
   line-height: 1.5;
   margin: 0 0 1rem 0;
-  text-transform: uppercase;
   /* letter-spacing: 0.2rem; */
 }
 
@@ -1462,7 +1461,6 @@ body.is-preload #bg:before {
 }
 
 #header .content p {
-  text-transform: uppercase;
   font-size: 0.8rem;
   line-height: 2;
 }
