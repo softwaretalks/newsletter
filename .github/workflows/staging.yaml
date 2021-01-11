@@ -27,7 +27,7 @@ jobs:
    
 
       - name: Run script
-        run: php main.php
+        run: echo $BOTTOM_CONTENT_HTML && php main.php
         env:
           PAKAT_SMTP_USERNAME: ${{ secrets.PAKAT_SMTP_USERNAME }}
           PAKAT_SMTP_PASSWORD: ${{ secrets.PAKAT_SMTP_PASSWORD }}
