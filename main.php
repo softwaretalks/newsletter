@@ -136,7 +136,7 @@ try {
         $mail->addBCC($value);
     }
     $mail->setFrom($configs['PAKAT_SMTP_EMAIL_ADDRESS'], $configs['PAKAT_SMTP_EMAIL_NAME']);
-    $mail->send();
+    // $mail->send();
 } catch (Exception $exception) {
     die("Message could not be sent. Mailer Error: {$exception->getMessage()}" . PHP_EOL);
 }
