@@ -21,3 +21,10 @@ jobs:
 
       - name: Run script
         run: php main.php
+        env:
+          PAKAT_SMTP_USERNAME: ${{ secrets.PAKAT_SMTP_USERNAME }}
+          PAKAT_SMTP_PASSWORD: ${{ secrets.PAKAT_SMTP_PASSWORD }}
+          PAKAT_API_KEY:  ${{ secrets.PAKAT_API_KEY }}
+          SEND_ENV: 'test'
+          # BOTTOM_CONTENT_HTML: '<p style="font-size: 16px; text-align: center; font-family: 'Samim'; direction: rtl; color: #263238; "><img src='https://pakat.net/wp-content/uploads/2020/02/pakat-new-logo-white_00ea005b1_2512.png'><br> ارسال شده توسط <a href="https://pakat.net/">پاکت</a></p><p style=" font-size: 14px; text-align: center; font-family: 'Samim'; direction: rtl; color: #263238; "> <a href="https://pakat.net/">سرویس پاکت</a> اسپانسر ارسال ایمیل<200c>های این خبرنامه است. با کد تخفیف sota10 می<200c>توانید از ۱۰ درصد تخفیف در خرید پلن<200c>های پاکت بهره<200c>مند شوید</p>'
+
