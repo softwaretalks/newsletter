@@ -1,13 +1,28 @@
-name: "Send email for all users"
+name: "Send email for all users (Be careful!)"
 
 on:
   workflow_dispatch:
 
 jobs:
-  sample:
+  send-email-for-all-users:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Show time
-        run: TZ=Asia/Tehran date
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: composer:v2
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --optimize-autoloader --quiet
+
+      - name: Run script
+        run: php main.php
+        env:
+          PAKAT_SMTP_USERNAME: ${{ secrets.PAKAT_SMTP_USERNAME }}
+          PAKAT_SMTP_PASSWORD: ${{ secrets.PAKAT_SMTP_PASSWORD }}
+          PAKAT_API_KEY:  ${{ secrets.PAKAT_API_KEY }}
+          # SEND_ENV: 'production'
