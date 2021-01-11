@@ -17,7 +17,7 @@ jobs:
           tools: composer:v2
 
       - name: Install Composer dependencies
-        run: composer install --no-progress --optimize-autoloader
+        run: composer install --no-progress --optimize-autoloader --quiet
 
       - name: Run script
         run: php main.php
