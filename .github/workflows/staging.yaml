@@ -26,11 +26,11 @@ jobs:
           echo "TOP_CONTENT_HTML=$(cat TOP_CONTENT_HTML.txt)" >> $GITHUB_ENV
 
       - name: Run script
-        run: echo $BOTTOM_CONTENT_HTML && php main.php
+        run: php main.php
         env:
           PAKAT_SMTP_USERNAME: ${{ secrets.PAKAT_SMTP_USERNAME }}
           PAKAT_SMTP_PASSWORD: ${{ secrets.PAKAT_SMTP_PASSWORD }}
-          PAKAT_API_KEY:  ${{ secrets.PAKAT_API_KEY }}
-          SEND_ENV: "test"
+          PAKAT_API_KEY:       ${{ secrets.PAKAT_API_KEY }}
           BOTTOM_CONTENT_HTML: ${{ env.BOTTOM_CONTENT_HTML }}
-   
+          TOP_CONTENT_HTML:    ${{ env.TOP_CONTENT_HTML }}
+          SEND_ENV:            "test"
