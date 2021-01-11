@@ -1,4 +1,4 @@
-name: "just-for-test"
+name: "Send email for test users"
 
 on:
   workflow_dispatch:

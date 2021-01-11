@@ -1,0 +1,13 @@
+name: "Send email for all users"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sample:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Show time
+        run: TZ=Asia/Tehran date
