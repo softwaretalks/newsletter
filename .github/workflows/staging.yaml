@@ -22,10 +22,8 @@ jobs:
       - name: Import BOTTOM_CONTENT_HTML and TOP_CONTENT_HTML into env
         shell: bash
         run: |
-          export BOTTOM_CONTENT_HTML=$(cat BOTTOM_CONTENT_HTML.txt)
-          export TOP_CONTENT_HTML=$(cat TOP_CONTENT_HTML.txt)
-          echo "::set-env name=BOTTOM_CONTENT_HTML::$BOTTOM_CONTENT_HTML"
-          echo "::set-env name=FTOP_CONTENT_HTML::$TOP_CONTENT_HTML"   
+          echo "BOTTOM_CONTENT_HTML=$(cat BOTTOM_CONTENT_HTML.txt)" >> $GITHUB_ENV
+          echo "TOP_CONTENT_HTML=$(cat TOP_CONTENT_HTML.txt)" >> $GITHUB_ENV
 
       - name: Run script
         run: echo $BOTTOM_CONTENT_HTML && php main.php
