@@ -33,5 +33,5 @@ jobs:
           PAKAT_SMTP_PASSWORD: ${{ secrets.PAKAT_SMTP_PASSWORD }}
           PAKAT_API_KEY:  ${{ secrets.PAKAT_API_KEY }}
           SEND_ENV: "test"
-          BOTTOM_CONTENT_HTML: ${{ BOTTOM_CONTENT_HTML }}
+          BOTTOM_CONTENT_HTML: ${{ env.BOTTOM_CONTENT_HTML }}
    
