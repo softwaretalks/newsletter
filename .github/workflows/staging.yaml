@@ -24,10 +24,8 @@ jobs:
         run: |
           export BOTTOM_CONTENT_HTML=$(cat BOTTOM_CONTENT_HTML.txt)
           export TOP_CONTENT_HTML=$(cat TOP_CONTENT_HTML.txt)
-          echo '---'
-          echo $BOTTOM_CONTENT_HTML
-          echo $TOP_CONTENT_HTML
-   
+          echo "::set-env name=BOTTOM_CONTENT_HTML::$BOTTOM_CONTENT_HTML"
+          echo "::set-env name=FTOP_CONTENT_HTML::$TOP_CONTENT_HTML"   
 
       - name: Run script
         run: echo $BOTTOM_CONTENT_HTML && php main.php
