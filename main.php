@@ -83,7 +83,6 @@ try {
  */
 printf('--> Fetch a list of registered users' . PHP_EOL);
 $userEmails = [];
-$userEmailsTemp = [];
 
 $pakatConfig = Configuration::getDefaultConfiguration()->setApiKey('api-key', $configs['PAKAT_API_KEY']);
 $contactsInstance = new ContactsApi(
@@ -92,6 +91,7 @@ $contactsInstance = new ContactsApi(
 );
 
 try {
+    $userEmailsTemp = [];
     $newsletterListID = "";
     if($configs['SEND_ENV'] === 'test') {
         $newsletterListID = $configs['NEWSLETTER_TEST_LIST_ID'];
