@@ -108,7 +108,7 @@ try {
             array_push($userEmailsTemp, $contact['email']);
         }
     }
-    // Due to the limited number of emails per post (99 email per send), 
+    // Due to the limited number of emails per send (99 email per send), 
     // the list of users should be broken down into smaller numbers.
     $userEmails = array_chunk($userEmailsTemp, 50, true);
 } catch (Exception $exception) {
