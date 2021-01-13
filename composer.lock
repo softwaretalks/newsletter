@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ec9791daa9ff011de9c05a64fa96030",
+    "content-hash": "aa5175b3506b23358bac8824676c6b63",
     "packages": [
         {
             "name": "amirbagh75/chalqoz",
@@ -5687,5 +5687,5 @@
         "php": "^7.4.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "1.1.0"
 }

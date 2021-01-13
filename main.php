@@ -14,12 +14,24 @@ use Symfony\Component\Yaml\Yaml;
 use Amirbagh75\Chalqoz\Chalqoz;
 use Twig\Environment;
 use Github\Client;
+use Carbon\Carbon;
 
 printf('SEND_ENV: %s', $configs['SEND_ENV'] . PHP_EOL . PHP_EOL);
 
 /*
  *
- * 1- Fetch issues from GitHub
+ * 1- Calculate newsletter number
+ *
+ */
+
+ $now = Carbon::now();
+ $newsletterStartDate = Carbon::createFromDate(2021, 01, 02); // This is our first posting date. (number 1)
+
+ $newsletterNumber = (int)($newsletterStartDate->diffInWeeks($now)) + 1;
+
+/*
+ *
+ * 2- Fetch issues from GitHub
  *
  */
 printf('--> Fetch issues from GitHub' . PHP_EOL);
@@ -50,7 +62,7 @@ try {
 
 /*
  *
- * 2- Generate HTML template based on issues
+ * 3- Generate HTML template based on issues
  *
  */
 printf('--> Generate HTML template based on issues' . PHP_EOL);
@@ -64,7 +76,7 @@ $twig = new Environment($loader, [
 try {
     $htmlTemplate = $twig->render($configs['EMAIL_TEMPLATE_FILE_NAME'], [
         'currentDate'      => Chalqoz::convertEnglishNumbersToPersian(jdate()->format('%A، %d %B %y')),
-        'newsletterNumber' => 'یکم',
+        'newsletterNumber' => Chalqoz::convertEnglishNumbersToPersian($newsletterNumber),
         'posts'            => $posts,
         'contributors'     => $contributors,
         'topContent'       => $configs['TOP_CONTENT_HTML'],
@@ -78,7 +90,7 @@ try {
 
 /*
  *
- * 3- Fetch a list of registered users
+ * 4- Fetch a list of registered users
  *
  */
 printf('--> Fetch a list of registered users' . PHP_EOL);
@@ -117,7 +129,7 @@ try {
 
 /*
  *
- * 4- Send email to all users with SMTP server
+ * 5- Send email to all users with SMTP server
  *
  */
 printf('--> Send email to %s user with SMTP server' . PHP_EOL , (string)array_sum(array_map("count", $userEmails)));
@@ -135,7 +147,7 @@ try {
         $mail->Password   = $configs['PAKAT_SMTP_PASSWORD'];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->CharSet    = 'UTF-8';
-        $mail->Subject    = 'خبرنامه Software Talks، شماره یکم';
+        $mail->Subject    = 'خبرنامه Software Talks، شماره' . Chalqoz::convertEnglishNumbersToPersian($newsletterNumber);
         $mail->Body       = $minifiedHtmlTemplate;
         foreach ($userEmailsArray as $email) {
             $mail->addBCC($email);
@@ -149,15 +161,16 @@ try {
 
 /*
  *
- * 5- Close related issues
+ * 6- Close related issues
  * It is currently manual.
  *
  */
 
+printf(PHP_EOL . '** Please close the current week issues **' . PHP_EOL);
 
 /*
  *
- * 6- Add archive to website
+ * 7- Add archive to website
  * It is currently manual.
  *
  */
