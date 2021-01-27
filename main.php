@@ -5,6 +5,10 @@ $scriptStartedAt = microtime(true);
 require_once __DIR__ . '/vendor/autoload.php';
 $configs = require_once __DIR__ . '/configs.php';
 
+use SendinBlue\Client\Model\CreateEmailCampaignRecipients;
+use SendinBlue\Client\Model\CreateEmailCampaignSender;
+use SendinBlue\Client\Model\CreateEmailCampaign;
+use SendinBlue\Client\Api\EmailCampaignsApi;
 use SendinBlue\Client\Api\ContactsApi;
 use WyriHaximus\HtmlCompress\Factory;
 use SendinBlue\Client\Configuration;
@@ -18,16 +22,20 @@ use Carbon\Carbon;
 
 printf('SEND_ENV: %s', $configs['SEND_ENV'] . PHP_EOL . PHP_EOL);
 
+// config pakat api
+$pakatConfig = Configuration::getDefaultConfiguration()->setApiKey('api-key', $configs['PAKAT_API_KEY']);
+
 /*
  *
  * 1- Calculate newsletter number
  *
  */
+printf('--> Calculate newsletter number' . PHP_EOL);
+$now = Carbon::now();
+$newsletterStartDate = Carbon::createFromDate(2021, 01, 02); // This is our first posting date. (number 1)
+$newsletterNumber = (int)($newsletterStartDate->diffInWeeks($now)) + 1;
+printf('--> Newsletter number: ' . $newsletterNumber . PHP_EOL);
 
- $now = Carbon::now();
- $newsletterStartDate = Carbon::createFromDate(2021, 01, 02); // This is our first posting date. (number 1)
-
- $newsletterNumber = (int)($newsletterStartDate->diffInWeeks($now)) + 1;
 
 /*
  *
@@ -60,6 +68,7 @@ try {
     die("Unable to parse the YAML string: {$exception->getMessage()}" . PHP_EOL);
 }
 
+
 /*
  *
  * 3- Generate HTML template based on issues
@@ -88,76 +97,54 @@ try {
     die("Unable to render template: {$exception->getMessage()}" . PHP_EOL);
 }
 
+
 /*
  *
- * 4- Fetch a list of registered users
+ * 4- Create campaign
  *
  */
-printf('--> Fetch a list of registered users' . PHP_EOL);
-$userEmails = [];
+printf('--> Create campaign' . PHP_EOL);
+$campaignID = "";
 
-$pakatConfig = Configuration::getDefaultConfiguration()->setApiKey('api-key', $configs['PAKAT_API_KEY']);
-$contactsInstance = new ContactsApi(
+$campaignAPI = new EmailCampaignsApi(
     new GuzzleHttp\Client(),
     $pakatConfig
 );
 
+$emailCampaign = new CreateEmailCampaign([
+    'name'        => 'SoftwareTalks #'. $newsletterNumber . (($configs['SEND_ENV'] === 'test') ? ' - Test' : ' - Production'),
+    'subject'     => 'خبرنامه شماره ' . Chalqoz::convertEnglishNumbersToPersian($newsletterNumber),
+    'htmlContent' => $minifiedHtmlTemplate,
+    'sender'      => new CreateEmailCampaignSender([
+        'email'   => $configs['PAKAT_EMAIL_ADDRESS'],
+        'name'    => $configs['PAKAT_EMAIL_NAME']
+    ]),
+    'recipients'  => new CreateEmailCampaignRecipients([
+        'listIds' => ($configs['SEND_ENV'] === 'test') ? [$configs['NEWSLETTER_TEST_LIST_ID']] : [$configs['NEWSLETTER_LIST_ID']],
+    ]),
+]);
+
 try {
-    $userEmailsTemp = [];
-    $newsletterListID = "";
-    if($configs['SEND_ENV'] === 'test') {
-        $newsletterListID = $configs['NEWSLETTER_TEST_LIST_ID'];
-    }
-    elseif($configs['SEND_ENV'] === 'production') {
-        $newsletterListID = $configs['NEWSLETTER_LIST_ID'];
-    }
-    $contacts = $contactsInstance->getContactsFromList($newsletterListID, null, 500)->getContacts();
-    if (count($contacts) === 0) {
-        die("There is no user!" . PHP_EOL);
-    }
-    foreach ($contacts as $contact) {
-        if ($contact['emailBlacklisted'] === false) {
-            array_push($userEmailsTemp, $contact['email']);
-        }
-    }
-    // Due to the limited number of emails per send (99 email per send), 
-    // the list of users should be broken down into smaller numbers.
-    $userEmails = array_chunk($userEmailsTemp, 50, true);
+    $result = $campaignAPI->createEmailCampaign($emailCampaign);
+    $campaignID = $result['id'];
 } catch (Exception $exception) {
-    die("Exception when calling AccountApi->getContactsFromList: {$exception->getMessage()}" . PHP_EOL);
+    die("Exception when calling campaignAPI->createEmailCampaign: {$exception->getMessage()}" . PHP_EOL);
 }
+
 
 /*
  *
- * 5- Send email to all users with SMTP server
+ * 5- Send campaign
  *
  */
-printf('--> Send email to %s user with SMTP server' . PHP_EOL , (string)array_sum(array_map("count", $userEmails)));
+printf('--> Send campaign. ID: ' . $campaignID . PHP_EOL);
 
-$mail = new PHPMailer(true);
 try {
-    foreach ($userEmails as $userEmailsArray) {
-        $mail->isSMTP();
-        $mail->SMTPDebug  = $configs['PAKAT_SMTP_DEBUG'];
-        $mail->SMTPAuth   = true;
-        $mail->Timeout    = 60;
-        $mail->Host       = $configs['PAKAT_SMTP_HOST'];
-        $mail->Port       = $configs['PAKAT_SMTP_PORT'];
-        $mail->Username   = $configs['PAKAT_SMTP_USERNAME'];
-        $mail->Password   = $configs['PAKAT_SMTP_PASSWORD'];
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->CharSet    = 'UTF-8';
-        $mail->Subject    = ' خبرنامه شماره ' . Chalqoz::convertEnglishNumbersToPersian($newsletterNumber);
-        $mail->Body       = $minifiedHtmlTemplate;
-        foreach ($userEmailsArray as $email) {
-            $mail->addBCC($email);
-        }
-        $mail->setFrom($configs['PAKAT_SMTP_EMAIL_ADDRESS'], $configs['PAKAT_SMTP_EMAIL_NAME']);
-        $mail->send();
-    }
+    $campaignAPI->sendEmailCampaignNow($campaignID);
 } catch (Exception $exception) {
-    die("Message could not be sent. Mailer Error: {$exception->getMessage()}" . PHP_EOL);
+    die("Exception when calling campaignAPI->sendEmailCampaignNow: {$exception->getMessage()}" . PHP_EOL);
 }
+
 
 /*
  *
@@ -165,8 +152,8 @@ try {
  * It is currently manual.
  *
  */
+printf(PHP_EOL . '** Please close the current week issues **');
 
-printf(PHP_EOL . '** Please close the current week issues **' . PHP_EOL);
 
 /*
  *
@@ -174,6 +161,7 @@ printf(PHP_EOL . '** Please close the current week issues **' . PHP_EOL);
  * It is currently manual.
  *
  */
+printf(PHP_EOL . '** Please add archive to the website**' . PHP_EOL);
 
 
 /*
@@ -181,6 +169,5 @@ printf(PHP_EOL . '** Please close the current week issues **' . PHP_EOL);
  * Done.
  *
  */
-
 $scriptEndedAt = microtime(true);
-printf('--> Done. Good job, it took %s seconds.' . PHP_EOL, $scriptEndedAt-$scriptStartedAt);
+printf(PHP_EOL . '--> Done. Good job, it took %s seconds.' . PHP_EOL, $scriptEndedAt-$scriptStartedAt);
