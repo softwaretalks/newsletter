@@ -1,4 +1,4 @@
-name: "🍊 Send email for test users"
+name: "🍊 Send email - Test"
 
 on:
   workflow_dispatch:
