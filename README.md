@@ -1,6 +1,6 @@
 <div dir='rtl'>
 
 # خبرنامه SoftwareTalks
-خبرنامه‌ای برای مهندسان نرم‌افزار و علاقه‌مندان به این حوزه
+کسب اطلاعات بیشتر:  https://newsletter.softwaretalks.ir
 
 </div>
