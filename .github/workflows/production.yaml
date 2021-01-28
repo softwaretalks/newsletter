@@ -1,4 +1,4 @@
-name: "♨️ Send email for all users"
+name: "♨️ Send email - Production"
 
 on:
   workflow_dispatch:
