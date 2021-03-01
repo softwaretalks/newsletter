@@ -1,6 +1,16 @@
 @import url(fontawesome-all.min.css);
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300italic,600italic,300,600");
 
+@font-face {
+  font-family: 'Estedad';
+  src: url("../../fonts/Estedad-Medium.ttf");
+  src: url("../../fonts/Estedad-Medium.woff2") format("woff2"),
+       url("../../fonts/Estedad-Medium.woff") format("woff"),
+       url("../../fonts/Estedad-Medium.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+
 /*
 	Dimension by HTML5 UP
 	html5up.net | @ajlkn
@@ -112,7 +122,7 @@ section {
 
 body {
   line-height: 1;
-  font-family: Vazir !important;
+  font-family: Estedad !important;
 }
 
 ol,
@@ -230,7 +240,7 @@ input,
 select,
 textarea {
   color: #ffffff;
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Source Sans Pro", Estedad;
   font-weight: 300;
   font-size: 1rem;
   line-height: 1.65;
@@ -1272,8 +1282,13 @@ button {
   -ms-transition: -ms-transform 0.325s ease-in-out,
     -ms-filter 0.325s ease-in-out;
   transition: transform 0.325s ease-in-out, filter 0.325s ease-in-out;
-  /* background-image: url("../../images/bg.jpg"); */
-  background-color: #f25d1d; 
+  background-image: url("../../images/bg.png");
+  -webkit-filter: blur(20px);
+  -moz-filter: blur(20px);
+  -o-filter: blur(20px);
+  -ms-filter: blur(20px);
+  filter: blur(20px);
+  background-color: black; 
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
