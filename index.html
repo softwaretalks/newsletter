@@ -19,7 +19,7 @@
     <link href="./favicons/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
     <link href="./favicons/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
     <link href="./favicons/manifest.json" rel="manifest" />
-    <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+    <link href="assets/css/emoji.css" rel="stylesheet">
     <noscript>
         <link href="assets/css/noscript.css" rel="stylesheet" />
     </noscript>
@@ -32,11 +32,14 @@
         <header id="header">
             <div class="content">
                 <div class="inner">
-                    <!-- <h1>خبرنامهٔ SoftwareTalks</h1> -->
+                    <h1><i class="em em-email" aria-role="presentation" aria-label="ENVELOPE"></i> خبرنامهٔ SoftwareTalks</h1>
+
                     <p style="font-size: 16px;">
                         ما مهندسای نرم‌افزار و علاقه‌مندان کامپیوتر، هر از گاهی با مطالب جالبی برخورد می‌کنیم که می‌تونه
-                        برای بقیه هم جالب باشه. «خبرنامهٔ ایمیلی SoftwareTalks» جایی برای اشتراک این مطالبه.
+                        برای بقیه هم جالب و کاربردی باشه. <b></b>«خبرنامهٔ ایمیلی SoftwareTalks» جایی برای اشتراک این مطالبه.
                     </p>
+
+                    <p id="subscribers"></p>
                 </div>
             </div>
             <nav>
@@ -143,7 +146,7 @@
                 '[تا این لحظه، <b>۳۹۸ نفر</b> مشترک خبرنامه شده‌اند.] ^1000 <i class="em em-sunglasses" aria-role="presentation" aria-label="SMILING FACE WITH SUNGLASSES"></i>',
             ],
             smartBackspace: true,
-            startDelay: 13000,
+            startDelay: 3000,
             backSpeed: 1000,
             typeSpeed: 100,
             showCursor: false,
