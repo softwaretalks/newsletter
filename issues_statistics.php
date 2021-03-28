@@ -21,7 +21,7 @@ foreach($result as $key => $item) {
     array_push($contributorsTemp, [
        'githubURL'  => $item['user']['html_url'],
        'username'   => $item['user']['login'],
-       'avatar'     => $item['user']['avatar_url'],
+       'avatar'     => $item['user']['avatar_url'] . '&s=60',
        'postsCount' => 0
     ]);
 }
