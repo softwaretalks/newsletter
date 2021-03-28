@@ -9,4 +9,8 @@
 
 توضیحات فنی نحوه کارکردن خبرنامه: [مشاهده ↗️](https://virgool.io/@amirbagh75/%DA%86%D8%B1%D8%AE%D9%88%D9%86%D8%AF%D9%86-%D8%AE%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D9%87-softwaretalks-%D8%A8%D8%A7-%DA%AF%DB%8C%D8%AA%D9%87%D8%A7%D8%A8-mgq8ktpi561g)
 
+# لیست مشارکت‌کنندگان به ترتیب تعداد پست
+
+![amirbagh75](https://avatars.githubusercontent.com/u/21690865?v=4&s=48) ![amirbagh75](https://avatars.githubusercontent.com/u/21690865?v=4&s=48)
+
 </div>
