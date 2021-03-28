@@ -11,6 +11,6 @@
 
 # لیست مشارکت‌کنندگان به ترتیب تعداد پست
 
-![amirbagh75](https://avatars.githubusercontent.com/u/21690865?v=4&s=48, '17') ![amirbagh75](https://avatars.githubusercontent.com/u/21690865?v=4&s=60, '34')
+![amirbagh75](https://avatars.githubusercontent.com/u/21690865?v=4&s=48 "17") ![amirbagh75](https://avatars.githubusercontent.com/u/21690865?v=4&s=60 "5")
 
 </div>
