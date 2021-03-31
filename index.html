@@ -44,10 +44,11 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="#signup">ثبت‌نام</a></li>
                     <li><a href="#contribute">نحوه مشارکت</a></li>
                     <li><a href="#archive">آرشیو</a></li>
+                    <li><a href="#signup" style="font-size: 18px; font-weight: bold;">اشتراک</a></li>
                     <li><a href="#rules">قوانین</a></li>
+                    <li><a href="#comment">نظرات شما</a></li>
                 </ul>
             </nav>
         </header>
@@ -57,12 +58,29 @@
 
             <article id="signup">
                 <p>
-                    از طریق لینک زیر ایمیلتون رو وارد کنید و سپس ایمیل تأییدی که براتون می‌آد رو کلیک کنید. تمام!
+                    برای گرفتن اشتراک خبرنامهٔ از طریق لینک زیر ایمیلتون رو وارد کنید و سپس ایمیل تأییدی که براتون می‌آد رو کلیک کنید. تمام!
                 </p>
                 <div>
                     <p style="text-align: center; margin: 25px 0;"><a
                             href="https://my.pakat.net/users/subscribe/js_id/6oud/id/1" target="_blank">ثبت‌نام در
-                            خبرنامه</a></p>
+                            خبرنامهٔ</a></p>
+                </div>
+
+            </article>
+
+            <article id="comment">
+                <p>
+                    هرچی که فکر می‌کنید به بهبود خبرنامهٔ کمک میکنه برامون بنویسید <i class="em em-heart" aria-role="presentation" aria-label="HEAVY BLACK HEART"></i>
+                </p>
+                <div>
+                    <script src="https://utteranc.es/client.js"
+                        repo="softwaretalks/newsletter"
+                        issue-term="url"
+                        label="comment"
+                        theme="icy-dark"
+                        crossorigin="anonymous"
+                        async>
+                    </script>
                 </div>
 
             </article>
@@ -142,7 +160,7 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+    <script src="assets/js/typed.js"></script>
     <script>
         var typed = new Typed('#subscribers', {
             strings: [
