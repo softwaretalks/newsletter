@@ -84,7 +84,7 @@ $twig = new Environment($loader, [
 
 try {
     $htmlTemplate = $twig->render($configs['EMAIL_TEMPLATE_FILE_NAME'], [
-        'currentDate'      => Chalqoz::convertEnglishNumbersToPersian(jdate()->format('%A، %d %B %y')),
+        'currentDate'      => Chalqoz::convertEnglishNumbersToPersian(jdate()->format('%A، %d %B %Y')),
         'newsletterNumber' => Chalqoz::convertEnglishNumbersToPersian($newsletterNumber),
         'posts'            => $posts,
         'contributors'     => $contributors,
