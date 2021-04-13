@@ -21,7 +21,7 @@ foreach($result as $key => $item) {
     array_push($contributorsTemp, [
        'githubURL'  => $item['user']['html_url'],
        'username'   => $item['user']['login'],
-       'avatar'     => $item['user']['avatar_url'] . '&s=60',
+       'avatarURL'     => $item['user']['avatar_url'] . '&s=60',
        'postsCount' => 0
     ]);
 }
@@ -40,4 +40,13 @@ $contributors[$amirbagh75Key]['postsCount'] -= 6;
 // Sort contributors by postsCount
 usort($contributors, fn($a,$b) => ($a['postsCount'] <= $b['postsCount']) ? 1 : -1);
 
-print_r($contributors);
+// print_r($contributors);
+// generate README.md contents for copy paste
+foreach ($contributors as $key => $value) {
+    $username = $value['username'];
+    $githubURL = $value['githubURL'];
+    $avatarURL = $value['avatarURL'];
+    $postsCount = $value['postsCount'];
+
+    echo "<a href='$githubURL'><img src='$avatarURL' width='60' alt='$username' title='$postsCount'></a> " . PHP_EOL;
+}
