@@ -33,7 +33,7 @@ $pakatConfig = Configuration::getDefaultConfiguration()->setApiKey('api-key', $c
 printf('--> Calculate newsletter number' . PHP_EOL);
 $now = Carbon::now();
 $newsletterStartDate = Carbon::createFromDate(2021, 01, 02); // This is our first posting date. (number 1)
-$newsletterNumber = (int)($newsletterStartDate->diffInWeeks($now)) + 1;
+$newsletterNumber = (int)(($newsletterStartDate->diffInWeeks($now)) + 1) - 4;
 printf('--> Newsletter number: ' . $newsletterNumber . PHP_EOL);
 
 
