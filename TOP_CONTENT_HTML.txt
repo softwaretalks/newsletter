@@ -1,1 +1,1 @@
-<p style='text-align: center;'>در خبرنامه قبلی به‌دلیل <a href='https://github.com/softwaretalks/newsletter/issues/177'>باگ نرم‌افزاری</a> شماره خبرنامه به اشتباه ۱۴ نوشته شده‌بود که در حقیقت خبرنامه شماره ۱۱ اُم بوده</p>
+<p style='text-align: center;'>در خبرنامه قبلی به‌دلیل <a href='https://github.com/softwaretalks/newsletter/issues/177'>باگ نرم‌افزاری</a>، شماره خبرنامه به اشتباه ۱۴ نوشته شده‌بود که در حقیقت خبرنامه شماره ۱۱ اُم بوده</p>
