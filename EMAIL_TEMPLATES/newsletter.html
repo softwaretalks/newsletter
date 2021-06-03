@@ -1,90 +1,68 @@
 <html dir="rtl" lang="fa">
-
-<head>
+  <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
     <style>
-        @font-face {
-            font-family: "Samim";
-            src: url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.eot");
-            src: url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.eot?#iefix") format("embedded-opentype"),
-                url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.woff") format("woff"),
-                url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.ttf") format("truetype");
-            font-weight: normal;
-        }
+      @font-face {
+        font-family: 'Samim';
+        src: url('https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.eot');
+        src: url('https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.eot?#iefix') format('embedded-opentype'),
+          url('https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.woff') format('woff'), url('https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.ttf') format('truetype');
+        font-weight: normal;
+      }
 
-        @font-face {
-            font-family: "Samim";
-            src: url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.eot");
-            src: url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.eot?#iefix") format("embedded-opentype"),
-                url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.woff") format("woff"),
-                url("https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.ttf") format("truetype");
-            font-weight: bold;
-        }
+      @font-face {
+        font-family: 'Samim';
+        src: url('https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.eot');
+        src: url('https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.eot?#iefix') format('embedded-opentype'),
+          url('https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.woff') format('woff'),
+          url('https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.ttf') format('truetype');
+        font-weight: bold;
+      }
 
-        ul {
-            padding: 0 25px;
-            /* list-style-type: none; */
-        }
+      ul {
+        padding: 0 25px;
+        /* list-style-type: none; */
+      }
     </style>
-</head>
+  </head>
 
-<body style="max-width: 680px; margin: 0 auto">
+  <body style="max-width: 680px; margin: 0 auto">
     <br /><br />
-    <h1
-        style="font-size: 25px;text-align: center;font-family: 'Samim',sans-serif;direction: rtl;font-weight: bold;color: #263238;">
-        خبرنامهٔ Softwaretalks
-    </h1>
-    <h3 style="
-        font-size: 18px;
-        text-align: center;
-        font-family: 'Samim',sans-serif;
-        direction: rtl;
-        color: #263238;
-      ">
-        شماره {{ newsletterNumber }} - {{ currentDate }}
+    <h1 style="font-size: 25px; text-align: center; font-family: 'Samim', sans-serif; direction: rtl; font-weight: bold; color: #263238">خبرنامهٔ Softwaretalks</h1>
+    <h3 style="font-size: 18px; text-align: center; font-family: 'Samim', sans-serif; direction: rtl; color: #263238">
+      شمارهٔ {{ newsletterNumber }} - {{ currentDate }}
     </h3>
     {% if topContent is not empty %}
-    <span>
-        {{ topContent|raw }}
-    </span>
+    <span> {{ topContent|raw }} </span>
     {% endif %}
     <hr />
-    <ul style="text-align: right; font-family: 'Samim',sans-serif; direction: rtl">
-        {% for post in posts %}
-        <li style="font-size: 18px;">
-            <b>{{ post.postTitle }}</b>
-        </li>
-        <p>
-            {{ post.postDescription }}
-            <br />
-            <a href="{{ post.postLink }}" style="font-size: 14px;">مطالعه مطلب اصلی</a>
-        </p>
-        {% if loop.last != true %}
+    <ul style="text-align: right; font-family: 'Samim', sans-serif; direction: rtl">
+      {% for post in posts %}
+      <li style="font-size: 18px">
+        <b>{{ post.postTitle }}</b>
+      </li>
+      <p>
+        {{ post.postDescription }}
         <br />
-        {% endif %}
-        {% endfor %}
+        <a href="{{ post.postLink }}" style="font-size: 14px">مطالعهٔ مطلب اصلی</a>
+      </p>
+      {% if loop.last != true %}
+      <br />
+      {% endif %} {% endfor %}
     </ul>
     <hr />
-    <p style="font-size: 13px; font-family: 'Samim',sans-serif; direction: rtl; text-align: right;">
-        در این شماره از خبرنامه، دوستان خوبی به نام‌های
-        {% for contributor in contributors %}
-        {% if loop.last %}
-        <b>{{ contributor }}</b>
-        {% else %}
-        <b>{{ contributor }}،</b>
-        {% endif %}
-        {% endfor %}
-        در تهیه محتوا کمک کردند. شما هم می‌توانید <a href="https://newsletter.softwaretalks.ir/#contribute">مشارکت
-            کنید</a>.
+    <p style="font-size: 13px; font-family: 'Samim', sans-serif; direction: rtl; text-align: right">
+      تأمین‌کنندگانِ محتوا در این شماره از خبرنامه: {% for contributor in contributors %} {% if loop.last %}
+      <b>{{ contributor }}</b>
+      {% else %}
+      <b>{{ contributor }}،</b>
+      {% endif %} {% endfor %} شما نیز می‌توانید <a href="https://newsletter.softwaretalks.ir/#contribute">مشارکت کنید</a>.
     </p>
     {% if bottomContent is not empty %}
     <hr />
-    <span>
-        {{ bottomContent|raw }}
-    </span>
+    <span> {{ bottomContent|raw }} </span>
     <hr />
     {% endif %}
     <br />
-</body>
-
+  </body>
 </html>
