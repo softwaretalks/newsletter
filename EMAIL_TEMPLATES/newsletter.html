@@ -38,14 +38,12 @@
     <hr />
     <ul style="text-align: right; font-family: 'Samim', sans-serif; direction: rtl">
       {% for post in posts %}
-      <li style="font-size: 18px">
-        <b>{{ post.postTitle }}</b>
-      </li>
-      <p>
-        {{ post.postDescription }}
-        <br />
-        <a href="{{ post.postLink }}" style="font-size: 14px">مطالعهٔ مطلب اصلی</a>
-      </p>
+      <a href="{{ post.postLink }}">
+        <li style="font-size: 18px">
+          <b>{{ post.postTitle }}</b>
+        </li>
+      </a>
+      <p>{{ post.postDescription }}</p>
       {% if loop.last != true %}
       <br />
       {% endif %} {% endfor %}
