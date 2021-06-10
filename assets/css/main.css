@@ -830,7 +830,7 @@ input[type='radio'] + label:before {
 ol {
   list-style: decimal;
   margin: 0 0 2rem 0;
-  padding-left: 1.25em;
+  padding-right: 2em;
 }
 
 ol li {
