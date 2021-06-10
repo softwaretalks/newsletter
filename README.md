@@ -15,7 +15,7 @@
 
 برای مشاهده تعداد پست‌های هر کاربر، کافیست که ماوس یا موشواره خود را روی تصویر مربوطه نگه‌دارید.
   
-<a href='https://github.com/amirbagh75'><img src='https://avatars.githubusercontent.com/u/21690865?v=4&s=60' width='60' alt='amirbagh75' title='28'></a> 
+<a href='https://github.com/ohmydevops'><img src='https://avatars.githubusercontent.com/u/21690865?v=4&s=60' width='60' alt='ohmydevops' title='30'></a> 
 <a href='https://github.com/hassan-shahbazi'><img src='https://avatars.githubusercontent.com/u/11143939?v=4&s=60' width='60' alt='hassan-shahbazi' title='20'></a> 
 <a href='https://github.com/Hameds'><img src='https://avatars.githubusercontent.com/u/1385656?v=4&s=60' width='60' alt='Hameds' title='14'></a> 
 <a href='https://github.com/amirshnll'><img src='https://avatars.githubusercontent.com/u/30009591?v=4&s=60' width='60' alt='amirshnll' title='7'></a> 
@@ -43,7 +43,7 @@
 <a href='https://github.com/markpash'><img src='https://avatars.githubusercontent.com/u/6353129?v=4&s=60' width='60' alt='markpash' title='1'></a> 
 <a href='https://github.com/Mvahedii'><img src='https://avatars.githubusercontent.com/u/43504442?v=4&s=60' width='60' alt='Mvahedii' title='1'></a> 
 <a href='https://github.com/iamvee'><img src='https://avatars.githubusercontent.com/u/14985408?v=4&s=60' width='60' alt='iamvee' title='1'></a> 
-<a href='https://github.com/AmiirAbM'><img src='https://avatars.githubusercontent.com/u/27636400?v=4&s=60' width='60' alt='AmiirAbM' title='1'></a> 
+<a href='https://github.com/Amiir-Dev'><img src='https://avatars.githubusercontent.com/u/27636400?v=4&s=60' width='60' alt='Amiir-Dev' title='1'></a> 
 <a href='https://github.com/mahdithejedi'><img src='https://avatars.githubusercontent.com/u/38344455?v=4&s=60' width='60' alt='mahdithejedi' title='1'></a> 
 <a href='https://github.com/kokabi1365'><img src='https://avatars.githubusercontent.com/u/44271870?v=4&s=60' width='60' alt='kokabi1365' title='1'></a> 
 <a href='https://github.com/mayazdi'><img src='https://avatars.githubusercontent.com/u/37179598?v=4&s=60' width='60' alt='mayazdi' title='1'></a> 
