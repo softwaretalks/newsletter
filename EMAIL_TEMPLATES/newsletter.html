@@ -21,7 +21,11 @@
 
       ul {
         padding: 0 25px;
-        /* list-style-type: none; */
+        list-style-type: none;
+      }
+      
+      ul li:first-of-type {
+        padding-top: 50px;
       }
     </style>
   </head>
@@ -41,7 +45,7 @@
     <span> {{ topContent|raw }} </span>
     {% endif %}
     <hr />
-    <ul style="text-align: right; font-family: 'Samim', sans-serif; direction: rtl; list-style-type: none;">
+    <ul style="text-align: right; font-family: 'Samim', sans-serif; direction: rtl;">
       {% for post in posts %}
       <a href="{{ post.postLink }}">
         <li style="font-size: 18px;">
