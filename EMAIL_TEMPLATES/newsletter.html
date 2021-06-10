@@ -41,10 +41,10 @@
     <span> {{ topContent|raw }} </span>
     {% endif %}
     <hr />
-    <ul style="text-align: right; font-family: 'Samim', sans-serif; direction: rtl">
+    <ul style="text-align: right; font-family: 'Samim', sans-serif; direction: rtl; list-style-type: none;">
       {% for post in posts %}
       <a href="{{ post.postLink }}">
-        <li style="font-size: 18px; list-style: none">
+        <li style="font-size: 18px;">
           <b>{{ post.postTitle }}</b>
         </li>
       </a>
