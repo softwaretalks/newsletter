@@ -48,6 +48,6 @@
 <a href='https://github.com/hamedsj'><img src='https://avatars.githubusercontent.com/u/17751865?v=4&s=60' width='60' alt='hamedsj' title='1'></a> 
 <a href='https://github.com/kokabi1365'><img src='https://avatars.githubusercontent.com/u/44271870?v=4&s=60' width='60' alt='kokabi1365' title='1'></a> 
 <a href='https://github.com/mahdithejedi'><img src='https://avatars.githubusercontent.com/u/38344455?v=4&s=60' width='60' alt='mahdithejedi' title='1'></a> 
-<a href='https://github.com/mayazdi'><img src='https://avatars.githubusercontent.com/u/37179598?v=4&s=60' width='60' alt='mayazdi' title='1'></a>tle='1'></a>
+<a href='https://github.com/mayazdi'><img src='https://avatars.githubusercontent.com/u/37179598?v=4&s=60' width='60' alt='mayazdi' title='1'>
 
 </div>
