@@ -105,7 +105,7 @@ try {
  */
 $archiveFileName = 'archives/num' . $newsletterNumber . '.html';
 
-if($configs['SEND_ENV'] === 'test') {
+if($configs['SEND_ENV'] === 'production') {
     $isFileCreated = file_put_contents($archiveFileName, $htmlTemplate);
     if(!$isFileCreated) {
         die('Archive not created.');
