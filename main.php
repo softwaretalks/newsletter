@@ -76,6 +76,7 @@ try {
  */
 printf('--> Generate HTML template based on issues' . PHP_EOL);
 $htmlTemplate = "";
+$todayDate = Chalqoz::convertEnglishNumbersToPersian(jdate()->format('%A، %d %B %Y'));
 
 $loader = new FilesystemLoader($configs['EMAIL_TEMPLATE_DIR']);
 $twig = new Environment($loader, [
@@ -84,7 +85,7 @@ $twig = new Environment($loader, [
 
 try {
     $htmlTemplate = $twig->render($configs['EMAIL_TEMPLATE_FILE_NAME'], [
-        'currentDate'      => Chalqoz::convertEnglishNumbersToPersian(jdate()->format('%A، %d %B %Y')),
+        'currentDate'      => $todayDate,
         'newsletterNumber' => Chalqoz::convertEnglishNumbersToPersian($newsletterNumber),
         'posts'            => $posts,
         'contributors'     => $contributors,
@@ -97,10 +98,24 @@ try {
     die("Unable to render template: {$exception->getMessage()}" . PHP_EOL);
 }
 
+/*
+ *
+ * 4- Generate HTML archive file
+ *
+ */
+$archiveFileName = 'archives/num' . $newsletterNumber . '.html';
+
+if($configs['SEND_ENV'] === 'test') {
+    $isFileCreated = file_put_contents($archiveFileName, $minifiedHtmlTemplate);
+    if(!$isFileCreated) {
+        die('Archive not created.');
+    }
+}
+
 
 /*
  *
- * 4- Create campaign
+ * 5- Create campaign
  *
  */
 printf('--> Create campaign' . PHP_EOL);
@@ -134,7 +149,7 @@ try {
 
 /*
  *
- * 5- Send campaign
+ * 6- Send campaign
  *
  */
 printf('--> Send campaign. ID: ' . $campaignID . PHP_EOL);
@@ -148,7 +163,7 @@ try {
 
 /*
  *
- * 6- Close related issues
+ * 7- Close related issues
  * It is currently manual.
  *
  */
@@ -157,11 +172,14 @@ printf(PHP_EOL . '** Please close the current week issues **');
 
 /*
  *
- * 7- Add archive to website
- * It is currently manual.
+ * 8- Add archive to website
+ * It is currently semi-manual.
  *
  */
-printf(PHP_EOL . '** Please add archive to the website**' . PHP_EOL);
+$newsletterNumberFaChar = Chalqoz::convertEnglishNumbersToPersian($newsletterNumber);
+$todayDateWithoutYear = Chalqoz::convertEnglishNumbersToPersian(jdate()->format('%A، %d %B'));
+printf(PHP_EOL . '** Please add below link to the index.html**' . PHP_EOL);
+printf(PHP_EOL . "<li>خبرنامه شماره $newsletterNumberFaChar - $todayDateWithoutYear  <a class='link' href='/$archiveFileName' target='_blank'><i class='em em-arrow_upper_left' aria-role='presentation' aria-label='NORTH WEST ARROW' style='font-size: 12px;'></i></a></li>" . PHP_EOL);
 
 
 /*
