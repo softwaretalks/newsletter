@@ -34,3 +34,16 @@ jobs:
           BOTTOM_CONTENT_HTML: ${{ env.BOTTOM_CONTENT_HTML }}
           TOP_CONTENT_HTML:    ${{ env.TOP_CONTENT_HTML }}
           SEND_ENV:            "production"
+
+      - name: Commit Archive file
+        run: |
+          git config --local user.email "ohmydevops@gmail.com"
+          git config --local user.name "ohmydevops"
+          git add -A
+          git commit -m "Add Archive"
+
+      - name: Push Archive file
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
