@@ -42,7 +42,7 @@
       شمارهٔ {{ newsletterNumber }} - {{ currentDate }}
     </h3>
     {% if topContent is not empty %}
-    <div> {{ topContent|raw }} </div>
+      <div> {{ topContent|raw }} </div>
     {% endif %}
     <hr />
     <ul style="text-align: right; font-family: 'Samim', sans-serif; direction: rtl;">
@@ -54,15 +54,18 @@
     </ul>
     <hr />
     <p style="font-size: 13px; font-family: 'Samim', sans-serif; direction: rtl; text-align: right;">
-      تأمین‌کنندگانِ محتوا در این شماره از خبرنامه: {% for contributor in contributors %} {% if loop.last %}
-      <b>{{ contributor }}</b>
-      {% else %}
-      <b>{{ contributor }}،</b>
-      {% endif %} {% endfor %} شما نیز می‌توانید <a href="https://newsletter.softwaretalks.ir/#contribute">مشارکت کنید</a>.
+      تأمین‌کنندگانِ محتوا در این شماره: 
+      {% for contributor in contributors %} 
+        {% if loop.last %}
+        <b>{{ contributor }}.</b>
+        {% else %}
+        <b>{{ contributor }}،</b>
+        {% endif %} 
+      {% endfor %} شما نیز می‌توانید <a href="https://newsletter.softwaretalks.ir/#contribute">مشارکت کنید</a>.
     </p>
     {% if bottomContent is not empty %}
-    <hr />
-    <div> {{ bottomContent|raw }} </div>
+      <hr />
+      <div> {{ bottomContent|raw }} </div>
     {% endif %}
     <br />
   </body>

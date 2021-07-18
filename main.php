@@ -3,6 +3,9 @@
 $scriptStartedAt = microtime(true);
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/modules/counter.php';
+require_once __DIR__ . '/modules/github.php';
+require_once __DIR__ . '/modules/template.php';
 $configs = require_once __DIR__ . '/configs.php';
 
 use SendinBlue\Client\Model\CreateEmailCampaignRecipients;
@@ -10,14 +13,9 @@ use SendinBlue\Client\Model\CreateEmailCampaignSender;
 use SendinBlue\Client\Model\CreateEmailCampaign;
 use SendinBlue\Client\Api\EmailCampaignsApi;
 use SendinBlue\Client\Api\ContactsApi;
-use WyriHaximus\HtmlCompress\Factory;
 use SendinBlue\Client\Configuration;
 use PHPMailer\PHPMailer\PHPMailer;
-use Twig\Loader\FilesystemLoader;
-use Symfony\Component\Yaml\Yaml;
 use Amirbagh75\Chalqoz\Chalqoz;
-use Twig\Environment;
-use Github\Client;
 use Carbon\Carbon;
 
 printf('SEND_ENV: %s', $configs['SEND_ENV'] . PHP_EOL . PHP_EOL);
@@ -26,97 +24,63 @@ printf('SEND_ENV: %s', $configs['SEND_ENV'] . PHP_EOL . PHP_EOL);
 $pakatConfig = Configuration::getDefaultConfiguration()->setApiKey('api-key', $configs['PAKAT_API_KEY']);
 
 /*
- *
  * 1- Calculate newsletter number
- *
  */
-printf('--> Calculate newsletter number' . PHP_EOL);
-$now = Carbon::now();
-$newsletterStartDate = Carbon::createFromDate(2021, 01, 02); // This is our first posting date. (number 1)
-$newsletterNumber = (int)(($newsletterStartDate->diffInWeeks($now)) + 1) - 4;
+$newsletterNumber = newsletterCounter();
 printf('--> Newsletter number: ' . $newsletterNumber . PHP_EOL);
 
 
 /*
- *
- * 2- Fetch issues from GitHub
- *
+ * 2- Fetch current-week posts from GitHub
  */
-printf('--> Fetch issues from GitHub' . PHP_EOL);
-$posts = [];
-$contributors = [];
+printf('--> Fetching issues from GitHub ...' . PHP_EOL);
 
-$githubClient = new Client();
-$issues = $githubClient->api('issue')->all($configs['REPOSITORY_ORGANIZATION'], $configs['REPOSITORY_NAME'], [
-    'labels' => implode(",", $configs['LABELS']),
-    'state' => $configs['STATE']
-]);
+$repoOrganization = $configs['REPOSITORY_ORGANIZATION'];
+$repoName         = $configs['REPOSITORY_NAME'];
+$labels           = $configs['LABELS'];
+$state            = $configs['STATE'];
 
-try {
-    $contributorsTemp = [];
-    foreach ($issues as $issue) {
-        $body = Yaml::parse($issue['body']);
-        $contributorsTemp[] = $body['userFullName'];
-        unset($body['userFullName']);
-        $posts[] = $body;
-    }
-    if (count($posts) === 0) {
-        die('There is no post!' . PHP_EOL);
-    }
-    $contributors = array_values(array_unique($contributorsTemp));
-} catch (Exception $exception) {
-    die("Unable to parse the YAML string: {$exception->getMessage()}" . PHP_EOL);
+$posts        = getPostsFromGitHub($repoOrganization, $repoName, $labels, $state);
+$postsCounter = count($posts);
+if ($postsCounter === 0) {
+    die('There is no post :( such a bad day bro, but do not despair. nobody knows about tomorrow.' . PHP_EOL);
 }
-
+printf("--> We have $postsCounter posts. such a good day bro :)" . PHP_EOL);
 
 /*
- *
- * 3- Generate HTML template based on issues
- *
+ * 3- Generate HTML template
  */
-printf('--> Generate HTML template based on issues' . PHP_EOL);
-$htmlTemplate = "";
-$todayDate = Chalqoz::convertEnglishNumbersToPersian(jdate()->format('%A، %d %B %Y'));
+printf('--> Generate HTML template' . PHP_EOL);
 
-$loader = new FilesystemLoader($configs['EMAIL_TEMPLATE_DIR']);
-$twig = new Environment($loader, [
-    'strict_variables' => true,
-]);
+$BOTTOM_CONTENT_HTML = $configs['BOTTOM_CONTENT_HTML'];
+$TOP_CONTENT_HTML    = $configs['TOP_CONTENT_HTML'];
+$emailTemplateName   = $configs['EMAIL_TEMPLATE_FILE_NAME'];
+$emailTemplateDir    = $configs['EMAIL_TEMPLATE_DIR'];
 
-try {
-    $htmlTemplate = $twig->render($configs['EMAIL_TEMPLATE_FILE_NAME'], [
-        'currentDate'      => $todayDate,
-        'newsletterNumber' => Chalqoz::convertEnglishNumbersToPersian($newsletterNumber),
-        'posts'            => $posts,
-        'contributors'     => $contributors,
-        'topContent'       => $configs['TOP_CONTENT_HTML'],
-        'bottomContent'    => $configs['BOTTOM_CONTENT_HTML']
-    ]);
-    $minifier = Factory::constructSmallest();
-    $minifiedHtmlTemplate = $minifier->compress($htmlTemplate);
-} catch (Exception $exception) {
-    die("Unable to render template: {$exception->getMessage()}" . PHP_EOL);
-}
+$htmlTemplate = generateHtmlTemplate(
+    $posts,
+    $emailTemplateName,
+    $emailTemplateDir,
+    $TOP_CONTENT_HTML,
+    $BOTTOM_CONTENT_HTML,
+    $newsletterNumber
+);
+$minifiedHtmlTemplate = convertToMinifiedHtmlTemplate($htmlTemplate);
 
 /*
- *
  * 4- Generate HTML archive file
- *
  */
-$archiveFileName = 'archives/num' . $newsletterNumber . '.html';
-
 if($configs['SEND_ENV'] === 'production') {
+    printf('--> Generate archive file' . PHP_EOL);
+    $archiveFileName = 'archives/num' . $newsletterNumber . '.html';
     $isFileCreated = file_put_contents($archiveFileName, $htmlTemplate);
     if(!$isFileCreated) {
         die('Archive not created.');
     }
 }
 
-
 /*
- *
  * 5- Create campaign
- *
  */
 printf('--> Create campaign' . PHP_EOL);
 $campaignID = "";
@@ -146,11 +110,8 @@ try {
     die("Exception when calling campaignAPI->createEmailCampaign: {$exception->getMessage()}" . PHP_EOL);
 }
 
-
 /*
- *
  * 6- Send campaign
- *
  */
 printf('--> Send campaign. ID: ' . $campaignID . PHP_EOL);
 
@@ -160,32 +121,24 @@ try {
     die("Exception when calling campaignAPI->sendEmailCampaignNow: {$exception->getMessage()}" . PHP_EOL);
 }
 
-
 /*
- *
  * 7- Close related issues
  * It is currently manual.
- *
  */
 printf(PHP_EOL . '** Please close the current week issues **');
 
-
 /*
- *
  * 8- Add archive to website
  * It is currently semi-manual.
- *
  */
-$newsletterNumberFaChar = Chalqoz::convertEnglishNumbersToPersian($newsletterNumber);
-$todayDateWithoutYear = Chalqoz::convertEnglishNumbersToPersian(jdate()->format('%A، %d %B'));
-printf(PHP_EOL . '** Please add below link to the index.html**' . PHP_EOL);
-printf(PHP_EOL . "<li>خبرنامه شماره $newsletterNumberFaChar - $todayDateWithoutYear  <a class='link' href='/$archiveFileName' target='_blank'><i class='em em-arrow_upper_left' aria-role='presentation' aria-label='NORTH WEST ARROW' style='font-size: 12px;'></i></a></li>" . PHP_EOL);
-
-
+if($configs['SEND_ENV'] === 'production') {
+    $newsletterNumberFaChar = Chalqoz::convertEnglishNumbersToPersian($newsletterNumber);
+    $todayDateWithoutYear = Chalqoz::convertEnglishNumbersToPersian(jdate()->format('%A، %d %B'));
+    printf(PHP_EOL . '** Please add below link to the index.html**' . PHP_EOL);
+    printf(PHP_EOL . "<li>خبرنامه شماره $newsletterNumberFaChar - $todayDateWithoutYear  <a class='link' href='/$archiveFileName' target='_blank'><i class='em em-arrow_upper_left' aria-role='presentation' aria-label='NORTH WEST ARROW' style='font-size: 12px;'></i></a></li>" . PHP_EOL);
+}
 /*
- *
  * Done.
- *
  */
 $scriptEndedAt = microtime(true);
 printf(PHP_EOL . '--> Done. Good job, it took %s seconds.' . PHP_EOL, $scriptEndedAt-$scriptStartedAt);
