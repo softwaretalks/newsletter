@@ -10,6 +10,14 @@
 آرشیو خبرنامه: [مشاهده ↗️](https://newsletter.softwaretalks.ir/#archive)
 
 توضیحات فنی نحوه کارکردن خبرنامه: [مشاهده ↗️](https://virgool.io/@amirbagh75/%DA%86%D8%B1%D8%AE%D9%88%D9%86%D8%AF%D9%86-%D8%AE%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D9%87-softwaretalks-%D8%A8%D8%A7-%DA%AF%DB%8C%D8%AA%D9%87%D8%A7%D8%A8-mgq8ktpi561g)
+  
+---
+  
+در ویدیوی پایین درباره این‌که چرا این خبرنامه را ساختیم و برای کسانی که تا به حال تجربه استفاده از گیتهاب را نداشته‌اند، توضیحاتی داده‌ایم. برای تماشا ویدیو روی تصویر زیر کلیک کنید:
+  
+<div align="center">
+  <a href="https://youtu.be/H17FfYRCaRE"><img src="https://raw.githubusercontent.com/softwaretalks/newsletter/main/screenshot.png" alt="Youtube cover"></a>
+</div>
 
 ## مشارکت‌کنندگان به ترتیب تعداد پست‌های ارسالی
 
