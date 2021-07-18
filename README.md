@@ -16,7 +16,7 @@
 در ویدیوی پایین درباره این‌که چرا این خبرنامه را ساختیم و برای کسانی که تا به حال تجربه استفاده از گیتهاب را نداشته‌اند، توضیحاتی داده‌ایم. برای تماشا ویدیو روی تصویر زیر کلیک کنید:
   
 <div align="center">
-  <a href="https://youtu.be/H17FfYRCaRE"><img src="https://raw.githubusercontent.com/softwaretalks/newsletter/main/screenshot.png" alt="Youtube cover"></a>
+  <a target='_blank' href="https://youtu.be/H17FfYRCaRE"><img src="https://raw.githubusercontent.com/softwaretalks/newsletter/main/screenshot.png" alt="Youtube cover"></a>
 </div>
 
 ## مشارکت‌کنندگان به ترتیب تعداد پست‌های ارسالی
