@@ -21,7 +21,7 @@
 
 ## مشارکت‌کنندگان به ترتیب تعداد پست‌های ارسالی
 
-برای مشاهده تعداد پست‌های هر کاربر، کافیست که ماوس یا موشواره خود را روی تصویر مربوطه نگه‌دارید.
+برای مشاهده تعداد پست‌های هر کاربر، کافیست که ماوس :computer_mouse: یا موشواره :mouse:	خود را روی تصویر مربوطه نگه‌دارید.
   
 <a href='https://github.com/ohmydevops'><img src='https://avatars.githubusercontent.com/u/21690865?v=4&s=60' width='60' alt='ohmydevops' title='34'></a> 
 <a href='https://github.com/Hameds'><img src='https://avatars.githubusercontent.com/u/1385656?v=4&s=60' width='60' alt='Hameds' title='22'></a> 
