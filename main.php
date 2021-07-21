@@ -33,13 +33,11 @@ printf('--> Newsletter number: ' . $newsletterNumber . PHP_EOL);
  * 2- Fetch current-week posts from GitHub
  */
 printf('--> Fetching issues from GitHub ...' . PHP_EOL);
-
-$repoOrganization = $configs['REPOSITORY_ORGANIZATION'];
-$repoName         = $configs['REPOSITORY_NAME'];
-$labels           = $configs['LABELS'];
-$state            = $configs['STATE'];
-
-$posts        = getPostsFromGitHub($repoOrganization, $repoName, $labels, $state);
+$repoOrg      = $configs['REPOSITORY_ORGANIZATION'];
+$repoName     = $configs['REPOSITORY_NAME'];
+$labels       = $configs['LABELS'];
+$state        = $configs['STATE'];
+$posts        = getPostsFromGitHub($repoOrg, $repoName, $labels, $state);
 $postsCounter = count($posts);
 if ($postsCounter === 0) {
     die('There is no post :( such a bad day bro, but do not despair. nobody knows about tomorrow.' . PHP_EOL);
@@ -50,12 +48,10 @@ printf("--> We have $postsCounter posts. such a good day bro :)" . PHP_EOL);
  * 3- Generate HTML template
  */
 printf('--> Generate HTML template' . PHP_EOL);
-
 $BOTTOM_CONTENT_HTML = $configs['BOTTOM_CONTENT_HTML'];
 $TOP_CONTENT_HTML    = $configs['TOP_CONTENT_HTML'];
 $emailTemplateName   = $configs['EMAIL_TEMPLATE_FILE_NAME'];
 $emailTemplateDir    = $configs['EMAIL_TEMPLATE_DIR'];
-
 $htmlTemplate = generateHtmlTemplate(
     $posts,
     $emailTemplateName,
@@ -70,7 +66,6 @@ $minifiedHtmlTemplate = convertToMinifiedHtmlTemplate($htmlTemplate);
  * 4- Create campaign
  */
 printf('--> Create campaign' . PHP_EOL);
-
 $campaignID = createNewCampaign(
     $pakatConfig,
     $httpClient,
