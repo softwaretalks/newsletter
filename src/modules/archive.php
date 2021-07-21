@@ -4,7 +4,7 @@ use Amirbagh75\Chalqoz\Chalqoz;
 
 function generateArchiveFile($htmlTemplate, $archiveFileName): string
 {
-    $isFileCreated = file_put_contents($archiveFileName, $htmlTemplate);
+    $isFileCreated = file_put_contents(__DIR__."/../../$archiveFileName", $htmlTemplate);
     if(!$isFileCreated) {
         die('Archive not created.');
     }

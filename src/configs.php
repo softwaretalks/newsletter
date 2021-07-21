@@ -17,7 +17,7 @@ return [
                                     'verified'
                                ],
     'STATE'                    => 'open',
-    'EMAIL_TEMPLATE_DIR'       => './EMAIL_TEMPLATES/',
+    'EMAIL_TEMPLATE_DIR'       => __DIR__ . '/EMAIL_TEMPLATES/',
     'EMAIL_TEMPLATE_FILE_NAME' => 'newsletter.html',
     'PAKAT_API_KEY'            => getenv('PAKAT_API_KEY', true),
     'PAKAT_SMTP_HOST'          => 'smtp-relay.sendinblue.com',
