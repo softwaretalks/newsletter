@@ -5,23 +5,22 @@ $scriptStartedAt = microtime(true);
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/modules/counter.php';
 require_once __DIR__ . '/modules/github.php';
+require_once __DIR__ . '/modules/archive.php';
 require_once __DIR__ . '/modules/template.php';
+require_once __DIR__ . '/modules/campaign.php';
 $configs = require_once __DIR__ . '/configs.php';
 
-use SendinBlue\Client\Model\CreateEmailCampaignRecipients;
-use SendinBlue\Client\Model\CreateEmailCampaignSender;
-use SendinBlue\Client\Model\CreateEmailCampaign;
-use SendinBlue\Client\Api\EmailCampaignsApi;
 use SendinBlue\Client\Api\ContactsApi;
 use SendinBlue\Client\Configuration;
 use PHPMailer\PHPMailer\PHPMailer;
 use Amirbagh75\Chalqoz\Chalqoz;
 use Carbon\Carbon;
 
-printf('SEND_ENV: %s', $configs['SEND_ENV'] . PHP_EOL . PHP_EOL);
-
 // config pakat api
-$pakatConfig = Configuration::getDefaultConfiguration()->setApiKey('api-key', $configs['PAKAT_API_KEY']);
+$pakatConfig  = Configuration::getDefaultConfiguration()->setApiKey('api-key', $configs['PAKAT_API_KEY']);
+$httpClient   = new GuzzleHttp\Client();
+$isProduction = ($configs['SEND_ENV'] === 'production') ? true : false;
+printf('SEND_ENV: %s', $configs['SEND_ENV'] . PHP_EOL . PHP_EOL);
 
 /*
  * 1- Calculate newsletter number
@@ -68,75 +67,45 @@ $htmlTemplate = generateHtmlTemplate(
 $minifiedHtmlTemplate = convertToMinifiedHtmlTemplate($htmlTemplate);
 
 /*
- * 4- Generate HTML archive file
- */
-if($configs['SEND_ENV'] === 'production') {
-    printf('--> Generate archive file' . PHP_EOL);
-    $archiveFileName = 'archives/num' . $newsletterNumber . '.html';
-    $isFileCreated = file_put_contents($archiveFileName, $htmlTemplate);
-    if(!$isFileCreated) {
-        die('Archive not created.');
-    }
-}
-
-/*
- * 5- Create campaign
+ * 4- Create campaign
  */
 printf('--> Create campaign' . PHP_EOL);
-$campaignID = "";
 
-$campaignAPI = new EmailCampaignsApi(
-    new GuzzleHttp\Client(),
-    $pakatConfig
+$campaignID = createNewCampaign(
+    $pakatConfig,
+    $httpClient,
+    $newsletterNumber,
+    $minifiedHtmlTemplate,
+    $isProduction,
+    $configs['PAKAT_EMAIL_ADDRESS'],
+    $configs['PAKAT_EMAIL_NAME'],
+    $configs['NEWSLETTER_TEST_LIST_ID'],
+    $configs['NEWSLETTER_LIST_ID']
 );
 
-$emailCampaign = new CreateEmailCampaign([
-    'name'        => 'SoftwareTalks #'. $newsletterNumber . (($configs['SEND_ENV'] === 'test') ? ' - Test' : ' - Production'),
-    'subject'     => 'خبرنامه شماره ' . Chalqoz::convertEnglishNumbersToPersian($newsletterNumber),
-    'htmlContent' => $minifiedHtmlTemplate,
-    'sender'      => new CreateEmailCampaignSender([
-        'email'   => $configs['PAKAT_EMAIL_ADDRESS'],
-        'name'    => $configs['PAKAT_EMAIL_NAME']
-    ]),
-    'recipients'  => new CreateEmailCampaignRecipients([
-        'listIds' => ($configs['SEND_ENV'] === 'test') ? [$configs['NEWSLETTER_TEST_LIST_ID']] : [$configs['NEWSLETTER_LIST_ID']],
-    ]),
-]);
-
-try {
-    $result = $campaignAPI->createEmailCampaign($emailCampaign);
-    $campaignID = $result['id'];
-} catch (Exception $exception) {
-    die("Exception when calling campaignAPI->createEmailCampaign: {$exception->getMessage()}" . PHP_EOL);
-}
-
 /*
- * 6- Send campaign
+ * 5- Send campaign
  */
-printf('--> Send campaign. ID: ' . $campaignID . PHP_EOL);
-
-try {
-    $campaignAPI->sendEmailCampaignNow($campaignID);
-} catch (Exception $exception) {
-    die("Exception when calling campaignAPI->sendEmailCampaignNow: {$exception->getMessage()}" . PHP_EOL);
-}
+printf('--> Sending campaign. ID: ' . $campaignID . PHP_EOL);
+sendCampaignByID($campaignID, $pakatConfig, $httpClient);
 
 /*
  * 7- Close related issues
  * It is currently manual.
  */
-printf(PHP_EOL . '** Please close the current week issues **');
+printf(PHP_EOL . '** Please close the current week issues by your hand. You can change your life with your hands! No sweat. **');
 
 /*
  * 8- Add archive to website
  * It is currently semi-manual.
  */
-if($configs['SEND_ENV'] === 'production') {
-    $newsletterNumberFaChar = Chalqoz::convertEnglishNumbersToPersian($newsletterNumber);
-    $todayDateWithoutYear = Chalqoz::convertEnglishNumbersToPersian(jdate()->format('%A، %d %B'));
-    printf(PHP_EOL . '** Please add below link to the index.html**' . PHP_EOL);
-    printf(PHP_EOL . "<li>خبرنامه شماره $newsletterNumberFaChar - $todayDateWithoutYear  <a class='link' href='/$archiveFileName' target='_blank'><i class='em em-arrow_upper_left' aria-role='presentation' aria-label='NORTH WEST ARROW' style='font-size: 12px;'></i></a></li>" . PHP_EOL);
+if(!$isProduction) {
+    printf('--> Generate archive file' . PHP_EOL);
+    $archiveFileName = generateArchiveName($newsletterNumber);
+    generateArchiveFile($htmlTemplate, $archiveFileName);
+    printArchiveFileNameForCopyPaste($newsletterNumber, $archiveFileName);
 }
+
 /*
  * Done.
  */

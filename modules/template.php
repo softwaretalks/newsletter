@@ -6,12 +6,12 @@ use Amirbagh75\Chalqoz\Chalqoz;
 use Twig\Environment;
 
 function generateHtmlTemplate(
-    array $posts,
-    string $emailTemplateName,
-    string $emailTemplateDir,
-    string $TOP_CONTENT_HTML,
-    string $BOTTOM_CONTENT_HTML,
-    int $newsletterNumber
+        array $posts,
+        string $emailTemplateName,
+        string $emailTemplateDir,
+        string $TOP_CONTENT_HTML,
+        string $BOTTOM_CONTENT_HTML,
+        int $newsletterNumber
     ): string
 {
     $todayDate = Chalqoz::convertEnglishNumbersToPersian(jdate()->format('%A، %d %B %Y'));
