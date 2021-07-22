@@ -10,11 +10,8 @@ require_once __DIR__ . '/modules/template.php';
 require_once __DIR__ . '/modules/campaign.php';
 $configs = require_once __DIR__ . '/configs.php';
 
-use SendinBlue\Client\Api\ContactsApi;
 use SendinBlue\Client\Configuration;
-use PHPMailer\PHPMailer\PHPMailer;
 use Amirbagh75\Chalqoz\Chalqoz;
-use Carbon\Carbon;
 
 // config pakat api
 $pakatConfig  = Configuration::getDefaultConfiguration()->setApiKey('api-key', $configs['PAKAT_API_KEY']);
