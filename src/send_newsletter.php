@@ -13,11 +13,11 @@ $configs = require_once __DIR__ . '/configs.php';
 use SendinBlue\Client\Configuration;
 use Amirbagh75\Chalqoz\Chalqoz;
 
-// config pakat api
-$pakatConfig  = Configuration::getDefaultConfiguration()->setApiKey('api-key', $configs['PAKAT_API_KEY']);
-$httpClient   = new GuzzleHttp\Client();
-$isProduction = ($configs['SEND_ENV'] === 'production') ? true : false;
+// config pakat api and http client
 printf('SEND_ENV: %s', $configs['SEND_ENV'] . PHP_EOL . PHP_EOL);
+$pakatConfig  = Configuration::getDefaultConfiguration()->setApiKey('api-key', $configs['PAKAT_API_KEY']);
+$httpClient   = new GuzzleHttp\Client(['timeout'  => 30]);
+$isProduction = ($configs['SEND_ENV'] === 'production') ? true : false;
 
 /*
  * 1- Calculate newsletter number
@@ -30,11 +30,12 @@ printf('--> Newsletter number: ' . $newsletterNumber . PHP_EOL);
  * 2- Fetch current-week posts from GitHub
  */
 printf('--> Fetching issues from GitHub ...' . PHP_EOL);
-$repoOrg      = $configs['REPOSITORY_ORGANIZATION'];
-$repoName     = $configs['REPOSITORY_NAME'];
-$labels       = $configs['LABELS'];
-$state        = $configs['STATE'];
-$posts        = getPostsFromGitHub($repoOrg, $repoName, $labels, $state);
+$posts = getPostsFromGitHub(
+    $configs['REPOSITORY_ORGANIZATION'],
+    $configs['REPOSITORY_NAME'],
+    $configs['LABELS'],
+    $configs['STATE']
+);
 $postsCounter = count($posts);
 if ($postsCounter === 0) {
     die('There is no post :( such a bad day bro, but do not despair. nobody knows about tomorrow.' . PHP_EOL);
@@ -45,16 +46,12 @@ printf("--> We have $postsCounter posts. such a good day bro :)" . PHP_EOL);
  * 3- Generate HTML template
  */
 printf('--> Generate HTML template' . PHP_EOL);
-$BOTTOM_CONTENT_HTML = $configs['BOTTOM_CONTENT_HTML'];
-$TOP_CONTENT_HTML    = $configs['TOP_CONTENT_HTML'];
-$emailTemplateName   = $configs['EMAIL_TEMPLATE_FILE_NAME'];
-$emailTemplateDir    = $configs['EMAIL_TEMPLATE_DIR'];
 $htmlTemplate = generateHtmlTemplate(
     $posts,
-    $emailTemplateName,
-    $emailTemplateDir,
-    $TOP_CONTENT_HTML,
-    $BOTTOM_CONTENT_HTML,
+    $configs['EMAIL_TEMPLATE_FILE_NAME'],
+    $configs['EMAIL_TEMPLATE_DIR'],
+    $configs['TOP_CONTENT_HTML'],
+    $configs['BOTTOM_CONTENT_HTML'],
     $newsletterNumber
 );
 $minifiedHtmlTemplate = convertToMinifiedHtmlTemplate($htmlTemplate);
