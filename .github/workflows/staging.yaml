@@ -29,7 +29,7 @@ jobs:
           echo "TOP_CONTENT_HTML=$(cat TOP_CONTENT_HTML.txt)" >> $GITHUB_ENV
 
       - name: Run script
-        run: php src/main.php
+        run: php src/send_newsletter.php
         env:
           PAKAT_SMTP_USERNAME: ${{ secrets.PAKAT_SMTP_USERNAME }}
           PAKAT_SMTP_PASSWORD: ${{ secrets.PAKAT_SMTP_PASSWORD }}
