@@ -88,7 +88,7 @@ printf(PHP_EOL . '** Please close the current week issues by your hand. You can 
  * 8- Add archive to website
  * It is currently semi-manual.
  */
-if(!$isProduction) {
+if($isProduction) {
     printf('--> Generate archive file' . PHP_EOL);
     $archiveFileName = generateArchiveName($newsletterNumber);
     generateArchiveFile($htmlTemplate, $archiveFileName);
