@@ -1,7 +1,7 @@
 <?php
 
 if(empty(getenv('PAKAT_API_KEY'))){
-    die('Please set ENV' . PHP_EOL);
+    die('Please set PAKAT_API_KEY' . PHP_EOL);
 }
 
 if(!in_array(getenv('SEND_ENV', true), ['test', 'production'])) {
