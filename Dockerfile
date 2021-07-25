@@ -7,7 +7,7 @@ RUN docker-php-ext-install intl
 RUN curl -sS https://getcomposer.org/installer | php -- --version=2.0.9 --install-dir=/usr/local/bin --filename=composer
 
 COPY . /app/newsletter
-WORKDIR /app/newsletter
+WORKDIR /app/newsletter/src
 
 RUN composer install
 
