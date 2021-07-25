@@ -1,13 +1,11 @@
 ![♨️ Send email - Production](https://github.com/softwaretalks/newsletter/workflows/%E2%99%A8%EF%B8%8F%20Send%20email%20-%20Production/badge.svg)
 <div dir='rtl'>
 
-# خبرنامهٔ ایمیلی SoftwareTalks
-
 <div align="center">
   <img src="https://raw.githubusercontent.com/softwaretalks/newsletter/main/images/SoftwareTalks.jpg" alt="cover">
 </div>
   
-ما مهندسایِ نرم‌افزار و علاقه‌مندانِ کامپیوتر هرازگاهی با مطالبِ جالبی برخورد می‌کنیم که می‌تونه به دردِ بقیه هم بخوره. **خبرنامهٔ نرم‌افزاریِ SoftwareTalks** جایی برای اشتراکِ این مطالبه. 
+ما مهندسایِ نرم‌افزار و علاقه‌مندانِ کامپیوتر هرازگاهی با مطالبِ جالبی برخورد می‌کنیم که می‌تونه به دردِ بقیه هم بخوره. **خبرنامهٔ نرم‌افزاریِ SoftwareTalks** جایی برای اشتراکِ این مطالبه.  در حال حاضر هر پنجشنبه خبرنامه ارسال میشود.
   
 وبسایت خبرنامه: [مشاهده ↗️](https://newsletter.softwaretalks.ir)
 
