@@ -2,6 +2,10 @@
 <div dir='rtl'>
 
 # خبرنامهٔ ایمیلی SoftwareTalks
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/softwaretalks/newsletter/main/images/SoftwareTalks.jpg" alt="cover">
+</div>
   
 ما مهندسایِ نرم‌افزار و علاقه‌مندانِ کامپیوتر هرازگاهی با مطالبِ جالبی برخورد می‌کنیم که می‌تونه به دردِ بقیه هم بخوره. **خبرنامهٔ نرم‌افزاریِ SoftwareTalks** جایی برای اشتراکِ این مطالبه. 
   
