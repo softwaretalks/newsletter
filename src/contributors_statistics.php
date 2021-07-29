@@ -8,45 +8,45 @@ use Github\ResultPager;
 $githubClient = new Client();
 $paginator    = new ResultPager($githubClient);
 
-$issues = $githubClient->api('issue');
+$issuesClient = $githubClient->api('issue');
 $parameters = ['softwaretalks', 'newsletter', [
-    'labels' => implode(",", ['content', 'verified']),
-    'state' => 'all'
+    'labels' => 'content,verified',
+    'state' => 'closed'
 ]];
 
-$result = $paginator->fetchAll($issues, 'all' ,$parameters);
+$issuesList = $paginator->fetchAll($issuesClient, 'all' ,$parameters);
 
 $contributorsTemp = [];
-foreach($result as $key => $item) {
+foreach($issuesList as $issue) {
     array_push($contributorsTemp, [
-       'githubURL'  => $item['user']['html_url'],
-       'username'   => $item['user']['login'],
-       'avatarURL'     => $item['user']['avatar_url'] . '&s=60',
+       'githubURL'  => $issue['user']['html_url'],
+       'username'   => $issue['user']['login'],
+       'avatarURL'  => $issue['user']['avatar_url'] . '&s=50',
        'postsCount' => 0
     ]);
 }
 $contributors = array_values(array_unique($contributorsTemp, SORT_REGULAR));
 
-// Calculate the number of posts per contributor 
-foreach($result as $key => $item) {
-    $contributorKey = array_search($item['user']['login'], array_column($contributors, 'username'), true);
+// Calculate the number of posts per contributor
+foreach($issuesList as $issue) {
+    $contributorKey = array_search($issue['user']['login'], array_column($contributors, 'username'), true);
     $contributors[$contributorKey]['postsCount']++;
 }
 
 // This is some shit code for remove my test issues from my real issues. sorry god.
-$amirbagh75Key = array_search('amirbagh75', array_column($contributors, 'username'), true);
-$contributors[$amirbagh75Key]['postsCount'] -= 6;
+$ohmydevopsKey = array_search('ohmydevops', array_column($contributors, 'username'), true);
+$contributors[$ohmydevopsKey]['postsCount'] -= 6;
 
 // Sort contributors by postsCount
 usort($contributors, fn($a,$b) => ($a['postsCount'] <= $b['postsCount']) ? 1 : -1);
 
 // print_r($contributors);
 // generate README.md contents for copy paste
-foreach ($contributors as $key => $value) {
-    $username = $value['username'];
-    $githubURL = $value['githubURL'];
-    $avatarURL = $value['avatarURL'];
-    $postsCount = $value['postsCount'];
+foreach ($contributors as $contributor) {
+    $username = $contributor['username'];
+    $githubURL = $contributor['githubURL'];
+    $avatarURL = $contributor['avatarURL'];
+    $postsCount = $contributor['postsCount'];
 
-    echo "<a href='$githubURL'><img src='$avatarURL' width='60' alt='$username' title='$postsCount'></a> " . PHP_EOL;
+    echo "<a href='$githubURL'><img src='$avatarURL' width='50' alt='$username' title='$postsCount'></a> " . PHP_EOL;
 }
