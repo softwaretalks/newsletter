@@ -104,7 +104,7 @@
           </p>
           <hr>
           <p>اگر دوست‌ دارین بیشتر درباره فلسفه خبرنامه بدونین یا اگر تا به‌حال با گیتهاب کار نکردین، این ویدیو رو تماشا کنید:</p>
-          <iframe  style="width: 100%; height: 350px;" src="https://www.youtube.com/embed/H17FfYRCaRE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe id="youtube_video" style="width: 100%; height: 350px;" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </article>
 
         <article id="archive">
@@ -184,18 +184,22 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/typed.js"></script>
     <script>
-      var typed = new Typed('#subscribers', {
-        strings: [
-          'اعضایِ خبرنامه تا این لحظه: <b>۶۶۱ نفر</b> <i class="em em-hushed" aria-role="presentation" aria-label="HUSHED FACE"></i>',
-          'اعضایِ خبرنامه تا این لحظه: <b>۶۶۱ نفر</b> ^1000  <i class="em em-sunglasses" aria-role="presentation" aria-label="SMILING FACE WITH SUNGLASSES"></i>',
-        ],
-        smartBackspace: true,
-        startDelay: 2000,
-        backSpeed: 1000,
-        typeSpeed: 50,
-        showCursor: false,
-        contentType: 'html',
-      });
+      window.onload = function(){
+        var typed = new Typed('#subscribers', {
+          strings: [
+            'اعضایِ خبرنامه تا این لحظه: <b>۶۶۱ نفر</b> <i class="em em-hushed" aria-role="presentation" aria-label="HUSHED FACE"></i>',
+            'اعضایِ خبرنامه تا این لحظه: <b>۶۶۱ نفر</b> ^1000  <i class="em em-sunglasses" aria-role="presentation" aria-label="SMILING FACE WITH SUNGLASSES"></i>',
+          ],
+          smartBackspace: true,
+          startDelay: 2000,
+          backSpeed: 1000,
+          typeSpeed: 50,
+          showCursor: false,
+          contentType: 'html',
+        });        
+        // update iframe url
+        document.getElementById('youtube_video').src = 'https://www.youtube.com/embed/H17FfYRCaRE'
+      };
     </script>
   </body>
 </html>
