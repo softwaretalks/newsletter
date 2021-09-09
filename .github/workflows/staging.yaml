@@ -37,3 +37,4 @@ jobs:
           BOTTOM_CONTENT_HTML: ${{ env.BOTTOM_CONTENT_HTML }}
           TOP_CONTENT_HTML:    ${{ env.TOP_CONTENT_HTML }}
           SEND_ENV:            "test"
+          IS_DARK:             "false"

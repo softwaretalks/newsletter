@@ -37,6 +37,7 @@ jobs:
           BOTTOM_CONTENT_HTML: ${{ env.BOTTOM_CONTENT_HTML }}
           TOP_CONTENT_HTML:    ${{ env.TOP_CONTENT_HTML }}
           SEND_ENV:            "production"
+          IS_DARK:             "false"
 
       - name: Commit Archive file
         run: |
