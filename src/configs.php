@@ -30,6 +30,7 @@ return [
     'NEWSLETTER_LIST_ID'            => 2,
     'SEND_ENV'                      => getenv('SEND_ENV', true),
     'TOP_CONTENT_HTML'              => getenv('TOP_CONTENT_HTML', true),
+    'TOP_CONTENT_HTML_DARK'         => getenv('TOP_CONTENT_HTML_DARK', true),
     'BOTTOM_CONTENT_HTML'           => getenv('BOTTOM_CONTENT_HTML', true),
     'BOTTOM_CONTENT_HTML_DARK'      => getenv('BOTTOM_CONTENT_HTML_DARK', true),
     'IS_DARK'                       => getenv('IS_DARK', true)
