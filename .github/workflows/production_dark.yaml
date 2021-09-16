@@ -1,4 +1,4 @@
-name: "♨️ Send email - Production"
+name: "♨️ Send email dark - Production"
 
 on:
   workflow_dispatch:
@@ -21,11 +21,11 @@ jobs:
           cd src
           composer install --no-progress --optimize-autoloader --quiet
 
-      - name: Import BOTTOM_CONTENT_HTML and TOP_CONTENT_HTML into env
+      - name: Import BOTTOM_CONTENT_HTML_DARK and TOP_CONTENT_HTML into env
         shell: bash
         run: |
           cd src
-          echo "BOTTOM_CONTENT_HTML=$(cat BOTTOM_CONTENT_HTML.txt)" >> $GITHUB_ENV
+          echo "BOTTOM_CONTENT_HTML_DARK=$(cat BOTTOM_CONTENT_HTML_DARK.txt)" >> $GITHUB_ENV
           echo "TOP_CONTENT_HTML=$(cat TOP_CONTENT_HTML.txt)" >> $GITHUB_ENV
 
       - name: Run script
@@ -34,10 +34,10 @@ jobs:
           PAKAT_SMTP_USERNAME: ${{ secrets.PAKAT_SMTP_USERNAME }}
           PAKAT_SMTP_PASSWORD: ${{ secrets.PAKAT_SMTP_PASSWORD }}
           PAKAT_API_KEY:       ${{ secrets.PAKAT_API_KEY }}
-          BOTTOM_CONTENT_HTML: ${{ env.BOTTOM_CONTENT_HTML }}
+          BOTTOM_CONTENT_HTML_DARK: ${{ env.BOTTOM_CONTENT_HTML_DARK }}
           TOP_CONTENT_HTML:    ${{ env.TOP_CONTENT_HTML }}
           SEND_ENV:            "production"
-          IS_DARK:             "false"
+          IS_DARK:             "true"
 
       - name: Commit Archive file
         run: |

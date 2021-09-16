@@ -1,10 +1,10 @@
-name: "♨️ Send email - Production"
+name: "🍊 Send email dark - Test"
 
 on:
   workflow_dispatch:
 
 jobs:
-  send-email-for-all-users:
+  send-email-for-test-users:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,11 +21,11 @@ jobs:
           cd src
           composer install --no-progress --optimize-autoloader --quiet
 
-      - name: Import BOTTOM_CONTENT_HTML and TOP_CONTENT_HTML into env
+      - name: Import BOTTOM_CONTENT_HTML_DARK and TOP_CONTENT_HTML into env
         shell: bash
         run: |
           cd src
-          echo "BOTTOM_CONTENT_HTML=$(cat BOTTOM_CONTENT_HTML.txt)" >> $GITHUB_ENV
+          echo "BOTTOM_CONTENT_HTML_DARK=$(cat BOTTOM_CONTENT_HTML_DARK.txt)" >> $GITHUB_ENV
           echo "TOP_CONTENT_HTML=$(cat TOP_CONTENT_HTML.txt)" >> $GITHUB_ENV
 
       - name: Run script
@@ -34,20 +34,7 @@ jobs:
           PAKAT_SMTP_USERNAME: ${{ secrets.PAKAT_SMTP_USERNAME }}
           PAKAT_SMTP_PASSWORD: ${{ secrets.PAKAT_SMTP_PASSWORD }}
           PAKAT_API_KEY:       ${{ secrets.PAKAT_API_KEY }}
-          BOTTOM_CONTENT_HTML: ${{ env.BOTTOM_CONTENT_HTML }}
+          BOTTOM_CONTENT_HTML_DARK: ${{ env.BOTTOM_CONTENT_HTML_DARK }}
           TOP_CONTENT_HTML:    ${{ env.TOP_CONTENT_HTML }}
-          SEND_ENV:            "production"
-          IS_DARK:             "false"
-
-      - name: Commit Archive file
-        run: |
-          git config --local user.email "ohmydevops@gmail.com"
-          git config --local user.name "ohmydevops"
-          git add -A
-          git commit -m "Add Archive"
-
-      - name: Push Archive file
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+          SEND_ENV:            "test"
+          IS_DARK:             "true"
