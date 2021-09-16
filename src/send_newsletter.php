@@ -46,14 +46,24 @@ printf("--> We have $postsCounter posts. such a good day bro :)" . PHP_EOL);
  * 3- Generate HTML template
  */
 printf('--> Generate HTML template' . PHP_EOL);
-$htmlTemplate = generateHtmlTemplate(
-    $posts,
-    $configs['EMAIL_TEMPLATE_FILE_NAME'],
-    $configs['EMAIL_TEMPLATE_DIR'],
-    $configs['TOP_CONTENT_HTML'],
-    $configs['BOTTOM_CONTENT_HTML'],
-    $newsletterNumber
-);
+if($configs['IS_DARK'] === 'true')
+    $htmlTemplate = generateHtmlTemplate(
+        $posts,
+        $configs['EMAIL_TEMPLATE_DARK_FILE_NAME'],
+        $configs['EMAIL_TEMPLATE_DIR'],
+        $configs['TOP_CONTENT_HTML_DARK'],
+        $configs['BOTTOM_CONTENT_HTML_DARK'],
+        $newsletterNumber
+    );
+else
+    $htmlTemplate = generateHtmlTemplate(
+        $posts,
+        $configs['EMAIL_TEMPLATE_FILE_NAME'],
+        $configs['EMAIL_TEMPLATE_DIR'],
+        $configs['TOP_CONTENT_HTML'],
+        $configs['BOTTOM_CONTENT_HTML'],
+        $newsletterNumber
+    );
 $minifiedHtmlTemplate = convertToMinifiedHtmlTemplate($htmlTemplate);
 
 /*
