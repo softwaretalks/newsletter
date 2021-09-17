@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html dir="rtl" lang="fa" style="background: #000;">
+<html dir="rtl" lang="fa">
   <head>
     <title>خبرنامه‌ ‌نرم‌افزاری SoftwareTalks</title>
     <meta charset="utf-8" />
@@ -30,43 +30,45 @@
     </style>
   </head>
 
-  <body style="max-width: 680px; margin: 0 auto;color: #fff;">
-    <br /><br />
-    <img
-      src="https://newsletter.softwaretalks.ir/favicons/apple-touch-icon.png"
-      alt="Softwaretalks Logo"
-      style="margin: 2.1em auto; display: block; width: 130px; border-radius: 5px;"
-    >
-    <h1 style="font-size: 25px; text-align: center; font-family: 'Samim', sans-serif; direction: rtl; font-weight: bold; color: red;">خبرنامهٔ Softwaretalks</h1>
-    <h3 style="font-size: 18px; text-align: center; font-family: 'Samim', sans-serif; direction: rtl; color: red;">
-      شمارهٔ {{ newsletterNumber }} - {{ currentDate }}
-    </h3>
-    {% if topContent is not empty %}
-      <div> {{ topContent|raw }} </div>
-    {% endif %}
-    <hr />
-    <ul style="text-align: right; font-family: 'Samim', sans-serif; direction: rtl;">
-      {% for post in posts %}
-        <li style="font-size: 18px; margin-top: 30px;">
-          <a style="color: red;" href="{{ post.postLink }}"><b>{{ post.postTitle }}</b></a><br/>{{ post.postDescription }}
-        </li>
-      {% endfor %}
-    </ul>
-    <hr />
-    <p style="font-size: 13px; font-family: 'Samim', sans-serif; direction: rtl; text-align: right;">
-      تأمین‌کنندگانِ محتوا در این شماره: 
-      {% for contributor in contributors %} 
-        {% if loop.last %}
-        <b>{{ contributor }}.</b>
-        {% else %}
-        <b>{{ contributor }}،</b>
-        {% endif %} 
-      {% endfor %} شما نیز می‌توانید <a style="color: red" href="https://newsletter.softwaretalks.ir/#contribute">مشارکت کنید</a>.
-    </p>
-    {% if bottomContent is not empty %}
+  <body style="background-color: #000;">
+    <div style="max-width: 680px; margin: 0 auto;color: #fff;">
+      <br /><br />
+      <img
+        src="https://newsletter.softwaretalks.ir/favicons/apple-touch-icon.png"
+        alt="Softwaretalks Logo"
+        style="margin: 2.1em auto; display: block; width: 130px; border-radius: 5px;"
+      >
+      <h1 style="font-size: 25px; text-align: center; font-family: 'Samim', sans-serif; direction: rtl; font-weight: bold; color: red;">خبرنامهٔ Softwaretalks</h1>
+      <h3 style="font-size: 18px; text-align: center; font-family: 'Samim', sans-serif; direction: rtl; color: red;">
+        شمارهٔ {{ newsletterNumber }} - {{ currentDate }}
+      </h3>
+      {% if topContent is not empty %}
+        <div> {{ topContent|raw }} </div>
+      {% endif %}
       <hr />
-      <div> {{ bottomContent|raw }} </div>
-    {% endif %}
-    <br />
+      <ul style="text-align: right; font-family: 'Samim', sans-serif; direction: rtl;">
+        {% for post in posts %}
+          <li style="font-size: 18px; margin-top: 30px;">
+            <a style="color: red;" href="{{ post.postLink }}"><b>{{ post.postTitle }}</b></a><br/>{{ post.postDescription }}
+          </li>
+        {% endfor %}
+      </ul>
+      <hr />
+      <p style="font-size: 13px; font-family: 'Samim', sans-serif; direction: rtl; text-align: right;">
+        تأمین‌کنندگانِ محتوا در این شماره: 
+        {% for contributor in contributors %} 
+          {% if loop.last %}
+          <b>{{ contributor }}.</b>
+          {% else %}
+          <b>{{ contributor }}،</b>
+          {% endif %} 
+        {% endfor %} شما نیز می‌توانید <a style="color: red" href="https://newsletter.softwaretalks.ir/#contribute">مشارکت کنید</a>.
+      </p>
+      {% if bottomContent is not empty %}
+        <hr />
+        <div> {{ bottomContent|raw }} </div>
+      {% endif %}
+      <br />
+    </div>
   </body>
 </html>
