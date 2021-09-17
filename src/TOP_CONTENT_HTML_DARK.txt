@@ -1,1 +1,1 @@
-<p style="text-align: center; color: red;font-family: 'Samim', sans-serif;"><small>این شماره از خبرنامه به احترام عزیزانی که اعضای خانواده‌ی خود را بر اثر کرونا از دست داده‌اند، سیاه‌پوش شده‌است.</small></p>
+<p style="text-align: center; color: red;font-family: 'Samim', sans-serif;"><small>این شماره از خبرنامه به احترام عزیزانی که اعضای خانواده‌ی خود را بر اثر کرونا از دست داده‌اند، سیاه‌پوش شده‌است</small></p>
