@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+    newsletter:
+        init: true
+        container_name: newsletter
+        build:
+            context: ./
+        ports:
+            - '8585:80'
+        environment:
+            WWWUSER: '${WWWUSER}'
+            LARAVEL_SAIL: 1
+        volumes:
+            - '.:/app/newsletter/'
+        restart: always
+        command: -S 0.0.0.0:80
