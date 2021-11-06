@@ -12,11 +12,10 @@ function createNewCampaign(
         GuzzleHttp\Client $httpClient,
         $newsletterNumber,
         $minifiedHtmlTemplate,
-        $isProduction,
+        $listID,
+        $campaignNamePostFix,
         $pakatEmailAddress,
         $pakatEmailName,
-        $newsletterTestListID,
-        $newsletterListID
     ): string
 {
     $campaignID = "";
@@ -27,7 +26,7 @@ function createNewCampaign(
     );
 
     $emailCampaign = new CreateEmailCampaign([
-        'name'        => 'SoftwareTalks #'. $newsletterNumber . ($isProduction ? ' - Production' : ' - Test'),
+        'name'        => 'SoftwareTalks #'. $newsletterNumber . ' - ' . $campaignNamePostFix,
         'subject'     => 'خبرنامه شماره ' . Chalqoz::convertEnglishNumbersToPersian($newsletterNumber),
         'htmlContent' => $minifiedHtmlTemplate,
         'sender'      => new CreateEmailCampaignSender([
@@ -35,7 +34,7 @@ function createNewCampaign(
             'name'    => $pakatEmailName
         ]),
         'recipients'  => new CreateEmailCampaignRecipients([
-            'listIds' => $isProduction ? [$newsletterListID] : [$newsletterTestListID],
+            'listIds' => [$listID],
         ]),
     ]);
     
