@@ -70,16 +70,18 @@ $minifiedHtmlTemplate = convertToMinifiedHtmlTemplate($htmlTemplate);
  * 4- Create campaign
  */
 printf('--> Create campaign' . PHP_EOL);
+$listID = $isProduction ? $configs['NEWSLETTER_LIST_ID'] : $configs['NEWSLETTER_TEST_LIST_ID'];
+$campaignNamePostFix = $isProduction ? 'Production' : 'Test';
+
 $campaignID = createNewCampaign(
     $pakatConfig,
     $httpClient,
     $newsletterNumber,
     $minifiedHtmlTemplate,
-    $isProduction,
+    $listID,
+    $campaignNamePostFix,
     $configs['PAKAT_EMAIL_ADDRESS'],
     $configs['PAKAT_EMAIL_NAME'],
-    $configs['NEWSLETTER_TEST_LIST_ID'],
-    $configs['NEWSLETTER_LIST_ID']
 );
 
 /*
