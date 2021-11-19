@@ -24,7 +24,7 @@
 
 برای مشاهده تعداد پست‌های هر کاربر، کافیست که ماوس :computer_mouse: یا موشواره :mouse:	خود را روی تصویر مربوطه نگه‌دارید.
 
-
+<div dir='rtl'>
 <a href='https://github.com/ohmydevops'><img src='https://avatars.githubusercontent.com/u/21690865?v=4&s=50' width='50' alt='ohmydevops' title='55'></a>
 <a href='https://github.com/Hameds'><img src='https://avatars.githubusercontent.com/u/1385656?v=4&s=50' width='50' alt='Hameds' title='35'></a>
 <a href='https://github.com/amirshnll'><img src='https://avatars.githubusercontent.com/u/30009591?v=4&s=50' width='50' alt='amirshnll' title='21'></a>
@@ -74,3 +74,4 @@
 <a href='https://github.com/slashsbin'><img src='https://avatars.githubusercontent.com/u/1018207?v=4&s=50' width='50' alt='slashsbin' title='1'></a>
 <a href='https://github.com/mrmmg'><img src='https://avatars.githubusercontent.com/u/30490118?v=4&s=50' width='50' alt='mrmmg' title='1'></a>
 <a href='https://github.com/hhosseinioun'><img src='https://avatars.githubusercontent.com/u/652403?v=4&s=50' width='50' alt='hhosseinioun' title='1'></a>
+</div>
