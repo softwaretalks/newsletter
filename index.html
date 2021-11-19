@@ -274,6 +274,28 @@
         </footer>
     </div>
 
+    <div style="text-align: center; z-index: 999;" class="cookie-notification cookie-notification_hidden_yes">
+        <div class="cookie-notification__header">
+            اجازه برای ذخیره کوکی‌ها
+        </div>
+        <div class="cookie-notification__body">
+            <p style="font-size: 15px; margin-bottom: 15px !important;">ما از سرویس Yandex metrika برای بررسی و تحلیل
+                کاربران به منظور بهبود عملکرد
+                خبرنامه استفاده میکنیم. اطلاعاتی که ذخیره میشود شامل نوع مرورگر و سیستم‌عامل شما به صورت ناشناس میباشد و
+                به جز این هیچ‌ داده‌ دیگری ذخیره نمیشود. با کلیک کردن روی دکمه "موافقم" به ما در بهبود خبرنامه کمک
+                میکنید. در صورتی که نیز تمایل به این کار ندارید روی دکمه "تمایلی ندارم" کلیک کنید.
+            </p>
+        </div>
+        <div>
+            <a style="cursor: pointer; font-size: 15px;" class="cookie-notification__button" id="yes"><i
+                    class="em em-bicyclist" aria-role="presentation" aria-label="BICYCLIST"></i> موافقم</a> &nbsp;
+            &nbsp; | &nbsp; &nbsp;
+            <a style="cursor: pointer; font-size: 15px;" class="cookie-notification__button" id="close"><i
+                    class="em em-heavy_multiplication_x" aria-role="presentation"
+                    aria-label="HEAVY MULTIPLICATION X"></i> تمایلی ندارم</a>
+        </div>
+    </div>
+
     <div id="bg"></div>
 
     <!-- Scripts -->
@@ -283,6 +305,7 @@
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/typed.js"></script>
+    <script src="assets/js/cookie.js"></script>
     <script>
         window.onload = function () {
             var typed = new Typed('#subscribers', {
@@ -302,30 +325,65 @@
         };
     </script>
 
-    <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
-        (function (m, e, t, r, i, k, a) {
-            m[i] = m[i] || function () {
-                (m[i].a = m[i].a || []).push(arguments)
-            };
-            m[i].l = 1 * new Date();
-            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode
-                .insertBefore(k, a)
-        })
-        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        var messageElement = $('.cookie-notification');
+        var agreement = Cookies.get('agreement');
+        console.log(agreement);
+        switch (agreement) {
+            case undefined:
+                showMessage();
+                break;
+            case '1':
+                initCounter();
+                break;
+            default:
+                break;
+        }
+        // Function that hides the alert.
+        function hideMessage() {
+            $(messageElement).addClass('cookie-notification_hidden_yes');
+        }
+        // Function that shows the alert.
+        function showMessage() {
+            $(messageElement).removeClass('cookie-notification_hidden_yes');
+        }
 
-        ym(86428979, "init", {
-            clickmap: true,
-            trackLinks: true,
-            accurateTrackBounce: true,
-            webvisor: true,
-            trackHash: true
+        function saveAnswer(isOk) {
+            // Hide the alert.
+            hideMessage();
+            // Set cookies.
+            Cookies.set('agreement', isOk);
+        }
+
+        function initCounter() {
+            (function (m, e, t, r, i, k, a) {
+                m[i] = m[i] || function () {
+                    (m[i].a = m[i].a || []).push(arguments)
+                };
+                m[i].l = 1 * new Date();
+                k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode
+                    .insertBefore(k, a)
+            })
+            (window, document, 'script', '//mc.yandex.ru/metrika/tag.js', 'ym')
+            ym(86428979, "init", {
+                clickmap: true,
+                trackLinks: true,
+                accurateTrackBounce: true,
+                webvisor: true,
+                trackHash: true
+            });
+            saveAnswer('1');
+        }
+        // Clicked the "I agree" button.
+        document.querySelector('#yes').addEventListener('click', function () {
+            initCounter();
+        });
+        // Clicked the "Close" button.
+        document.querySelector('#close').addEventListener('click', function () {
+            saveAnswer('0');
+            hideMessage();
         });
     </script>
-    <noscript>
-        <div><img src="https://mc.yandex.ru/watch/86428979" style="position:absolute; left:-9999px;" alt="" /></div>
-    </noscript>
-    <!-- /Yandex.Metrika counter -->
 
 </body>
 

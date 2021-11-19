@@ -1772,3 +1772,28 @@ body.is-preload #footer {
 .link {
   border-bottom: 0 !important;
 }
+
+
+.cookie-notification {
+  position: fixed;
+  background-color: rgb(0 0 0 / 97%);
+  bottom: 0;
+  width: 100%;
+  color: white;
+  padding: 15px;
+}
+
+.cookie-notification_hidden_yes {
+  display: none;
+}
+
+.cookie-notification__header {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.cookie-notification__body {
+  max-width: 978px;
+  text-align: center;
+  margin: 15px auto;
+}
