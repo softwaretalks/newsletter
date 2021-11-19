@@ -20,9 +20,9 @@
   <a target='_blank' href="https://youtu.be/H17FfYRCaRE"><img src="https://raw.githubusercontent.com/softwaretalks/newsletter/main/screenshot.png" alt="Youtube cover"></a>
 </div>
 
-##  (۴۹ مشارکت کننده) مشارکت‌کنندگان به ترتیب تعداد پست‌های ارسالی
+##  مشارکت‌کنندگان به ترتیب تعداد پست‌های ارسالی
 
-برای مشاهده تعداد پست‌های هر کاربر، کافیست که ماوس :computer_mouse: یا موشواره :mouse:	خود را روی تصویر مربوطه نگه‌دارید.
+برای مشاهده تعداد پست‌های هر کاربر، کافیست که ماوس :computer_mouse: یا موشواره :mouse:	 خود را روی تصویر مربوطه نگه‌دارید. تا این لحظه ۴۹ نفر در تهیه محتوای هر هفته مشارکت کرده‌اند.
 
 <div dir='rtl'>
 <a href='https://github.com/ohmydevops'><img src='https://avatars.githubusercontent.com/u/21690865?v=4&s=50' width='50' alt='ohmydevops' title='55'></a>
