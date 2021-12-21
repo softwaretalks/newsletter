@@ -351,10 +351,12 @@
         }
 
         function saveAnswer(isOk) {
-            // Hide the alert.
             hideMessage();
-            // Set cookies.
-            Cookies.set('agreement', isOk);
+            if(isOk) {
+                document.cookie = `agreement=${isOk}; max-age=31536000; path=/`;
+            } else {
+                document.cookie = `agreement=${isOk}; max-age=86400; path=/`;
+            }
         }
 
         function initCounter() {
