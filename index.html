@@ -363,7 +363,7 @@
 
         function saveAnswer(isOk) {
             hideMessage();
-            if(isOk) {
+            if (isOk) {
                 document.cookie = `agreement=${isOk}; max-age=31536000; path=/`;
             } else {
                 document.cookie = `agreement=${isOk}; max-age=86400; path=/`;
@@ -399,6 +399,12 @@
             hideMessage();
         });
     </script>
+
+    <script src="https://cdn.payping.ir/statics/donate.min.js" type="text/javascript" charset="utf-8"
+        pp-userName="hamedblog" pp-description="با حمایت مالی، به تداوم پروژه کمک کنید :)"
+        pp-amounts="20000,50000,100000"
+        pp-avatar="https://nocdn.payping.ir/files/186124/profilepic/855fe932-0e02-400c-a961-5cf51af6d8ad.jpg"></script>
+
 
 </body>
 
