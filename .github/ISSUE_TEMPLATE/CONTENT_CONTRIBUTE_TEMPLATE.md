@@ -4,7 +4,7 @@ about: برای مشارکت در محتوای هفتگی خبرنامه، کا�
   کنید.
 title: عنوان مطلب را اینجا نیز وارد کنید | ترجیحا فارسی
 labels: content
-assignees: Hameds, ohmydevops
+assignees: Hameds, ohmydevops, amirshnll
 
 ---
 
