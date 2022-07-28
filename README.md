@@ -1,5 +1,3 @@
-![♨️ Send email - Production](https://github.com/softwaretalks/newsletter/workflows/%E2%99%A8%EF%B8%8F%20Send%20email%20-%20Production/badge.svg)
-
 <div align="center">
   <img src="https://raw.githubusercontent.com/softwaretalks/newsletter/main/images/SoftwareTalks.jpg" alt="cover">
 </div>
