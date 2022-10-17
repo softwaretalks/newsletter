@@ -42,6 +42,14 @@ if ($postsCounter === 0) {
 }
 printf("--> We have $postsCounter posts. such a good day bro :)" . PHP_EOL);
 
+// add dots end of description without dots
+for ($i=0; $i < $postsCounter; $i++) { 
+    $lastCharacterDescription = substr(ltrim(rtrim($posts[$i]["postDescription"])), -1);
+    if($lastCharacterDescription != ".") {
+        $posts[$i]["postDescription"] .= ".";
+    }
+}
+
 /*
  * 3- Generate HTML template
  */
