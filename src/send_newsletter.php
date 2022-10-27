@@ -8,6 +8,7 @@ require_once __DIR__ . '/modules/github.php';
 require_once __DIR__ . '/modules/archive.php';
 require_once __DIR__ . '/modules/template.php';
 require_once __DIR__ . '/modules/campaign.php';
+require_once __DIR__ . '/modules/feed.php';
 $configs = require_once __DIR__ . '/configs.php';
 
 use SendinBlue\Client\Configuration;
@@ -106,6 +107,12 @@ if($isProduction) {
     generateArchiveFile($htmlTemplate, $archiveFileName);
     printArchiveFileNameForCopyPaste($newsletterNumber, $archiveFileName);
 }
+
+/*
+ * 9- Regenerate the Feed
+ */
+printf('--> Regenerate the Feed' . PHP_EOL);
+generateAtomFeed();
 
 /*
  * Done.
