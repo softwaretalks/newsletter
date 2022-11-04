@@ -1,1 +1,1 @@
-<p style="text-align: center; color: red;font-family: 'Samim', sans-serif;"><small>این شماره از خبرنامه به احترام عزیزانی که جان خود را در راه آزادی از دست داده‌اند، سیاه‌پوش شده‌است</small><br/>#مهسا_امینی</p>
+<p style="direction:rtl;text-align: center; color: red;font-family: 'Samim', sans-serif;"><small>این شماره از خبرنامه به احترام عزیزانی که جان خود را در راه آزادی از دست داده‌اند، سیاه‌پوش شده‌است</small><br/>#مهسا_امینی</p>
