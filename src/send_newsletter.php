@@ -30,7 +30,11 @@ printf('--> Newsletter number: ' . $newsletterNumber . PHP_EOL);
  * 2- Fetch current-week posts from GitHub
  */
 printf('--> Fetching issues from GitHub ...' . PHP_EOL);
-$posts = getPostsFromGitHub(
+$githubClinet = new github(
+    $configs['GITHUB_USER_NAME'],
+    $configs['GITHUB_TOKEN']
+);
+$posts = $githubClinet->getPostsFromGitHub(
     $configs['REPOSITORY_ORGANIZATION'],
     $configs['REPOSITORY_NAME'],
     $configs['LABELS'],

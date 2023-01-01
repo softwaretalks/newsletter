@@ -4,6 +4,13 @@ if(empty(getenv('PAKAT_API_KEY'))){
     die('Please set PAKAT_API_KEY' . PHP_EOL);
 }
 
+if(
+    empty(getenv('GITHUB_TOKEN')) ||
+    empty(getenv('GITHUB_USER_NAME'))
+){
+    die('Please config Github ' . PHP_EOL);
+}
+
 if(!in_array(getenv('SEND_ENV', true), ['test', 'production'])) {
     putenv('SEND_ENV=test');
 }
@@ -26,6 +33,8 @@ return [
     'PAKAT_EMAIL_NAME'              => 'Softwaretalks newsletter',
     'PAKAT_EMAIL_ADDRESS'           => 'newsletter@softwaretalks.ir',
     'PAKAT_SMTP_DEBUG'              => false,
+    'GITHUB_USER_NAME'              => getenv('GITHUB_USER_NAME', true),
+    'GITHUB_TOKEN'                  => getenv('GITHUB_TOKEN', true),
     'NEWSLETTER_TEST_LIST_ID'       => 8,
     'NEWSLETTER_LIST_ID'            => 2,
     'SEND_ENV'                      => getenv('SEND_ENV', true),
