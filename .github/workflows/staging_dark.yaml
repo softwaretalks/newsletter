@@ -34,6 +34,8 @@ jobs:
           PAKAT_SMTP_USERNAME: ${{ secrets.PAKAT_SMTP_USERNAME }}
           PAKAT_SMTP_PASSWORD: ${{ secrets.PAKAT_SMTP_PASSWORD }}
           PAKAT_API_KEY:       ${{ secrets.PAKAT_API_KEY }}
+          GITHUB_USER_NAME:    ${{ secrets.GITHUB_USER_NAME }}
+          GITHUB_TOKEN:        ${{ secrets.GITHUB_TOKEN }}
           BOTTOM_CONTENT_HTML_DARK: ${{ env.BOTTOM_CONTENT_HTML_DARK }}
           TOP_CONTENT_HTML_DARK:    ${{ env.TOP_CONTENT_HTML_DARK }}
           SEND_ENV:            "test"
