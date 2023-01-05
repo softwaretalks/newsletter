@@ -34,8 +34,8 @@ jobs:
           PAKAT_SMTP_USERNAME: ${{ secrets.PAKAT_SMTP_USERNAME }}
           PAKAT_SMTP_PASSWORD: ${{ secrets.PAKAT_SMTP_PASSWORD }}
           PAKAT_API_KEY:       ${{ secrets.PAKAT_API_KEY }}
-          GITHUB_USER_NAME:    ${{ secrets.GITHUB_USER_NAME }}
-          GITHUB_TOKEN:        ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USER_NAME:    ${{ secrets.STN_GITHUB_USER_NAME }}
+          GITHUB_TOKEN:        ${{ secrets.STN_GITHUB_TOKEN }}
           BOTTOM_CONTENT_HTML: ${{ env.BOTTOM_CONTENT_HTML }}
           TOP_CONTENT_HTML:    ${{ env.TOP_CONTENT_HTML }}
           SEND_ENV:            "production"
@@ -51,5 +51,5 @@ jobs:
       - name: Push Archive file
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.STN_GITHUB_TOKEN }}
           branch: main
