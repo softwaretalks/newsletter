@@ -42,7 +42,7 @@
       شمارهٔ {{ newsletterNumber }} - {{ currentDate }}
     </h3>
     {% if topContent is not empty %}
-      <div> {{ topContent|raw }} </div>
+      <div dir="rtl"> {{ topContent|raw }} </div>
     {% endif %}
     <hr />
     <ul style="text-align: right; font-family: 'Samim', sans-serif; direction: rtl;">
@@ -70,7 +70,7 @@
     </p>
     {% if bottomContent is not empty %}
       <hr />
-      <div> {{ bottomContent|raw }} </div>
+      <div dir="rtl"> {{ bottomContent|raw }} </div>
     {% endif %}
     <br />
   </body>
