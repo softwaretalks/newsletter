@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+     .message-box {
+          @apply px-5 py-3 bg-gray-100 rounded-xl overflow-hidden;
+     }
+}
+
+
+
+@font-face {
+     font-family: 'Samim';
+     src: url('https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.eot');
+     src: url('https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.eot?#iefix') format('embedded-opentype'),
+          url('https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.woff') format('woff'),
+          url('https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.ttf') format('truetype');
+     font-weight: normal;
+}
+
+@font-face {
+     font-family: 'Samim';
+     src: url('https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.eot');
+     src: url('https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.eot?#iefix') format('embedded-opentype'),
+          url('https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.woff') format('woff'),
+          url('https://cdn.fontcdn.ir/Font/Persian/Samim/Samim-Bold.ttf') format('truetype');
+     font-weight: bold;
+}
+
+
+body {
+     font-family: 'Samim';
+}
